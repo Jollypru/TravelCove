@@ -4,6 +4,7 @@ import HomePage from "../pages/home/HomePage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import ManageProfile from "../pages/dashboard/manageProfile/ManageProfile";
 
 const router = createBrowserRouter([
     {
@@ -25,8 +26,14 @@ const router = createBrowserRouter([
       ]
     },
     {
-        path:"/dashboard",
-        element: <DashboardLayout></DashboardLayout>
+        path:"dashboard",
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path:'manageProfile',
+                element:<ManageProfile></ManageProfile>
+            }
+        ]
     }
   ]);
 

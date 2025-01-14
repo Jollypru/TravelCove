@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
+import { FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
+    const { user, logout } = useAuth();
     const [isScrolled, setIsScrolled] = useState(false);
     const location = useLocation();
+
+    const links = <>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink>Community</NavLink></li>
+        <li><NavLink>About Us</NavLink></li>
+        <li><NavLink>Trips</NavLink></li>
+    </>
 
     const handleScroll = () => {
         if (window.scrollY > 50) {
@@ -22,12 +32,12 @@ const Navbar = () => {
 
     const isHomePage = location.pathname === '/';
 
-    const links = <>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink>Community</NavLink></li>
-        <li><NavLink>About Us</NavLink></li>
-        <li><NavLink>Trips</NavLink></li>
-    </>
+    const handleLogout = () => {
+        logout()
+            .then(() => console.log('logged out user'))
+            .catch(error => console.log(error))
+    }
+
     return (
         <div className={`navbar max-w-screen-2xl mx-auto px-3  md:px-5 lg:px-10 fixed top-0 z-50 text-white ${isScrolled || !isHomePage ? 'bg-sky-800' : 'bg-transparent'} `}>
             <div className="navbar-start">
@@ -60,10 +70,45 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex gap-3">
-                <button className='py-1 px-4 border rounded-md hover:bg-sky-800 hover:text-white'><Link to='/login'>Login</Link></button>
-                <button className='hover:bg-sky-800 py-1 px-4 text-white border rounded-md'><Link to='/register'>Register</Link></button>
-            </div>
-        </div>
+                {
+                    user ? (
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} className="flex items-center gap-3 cursor-pointer">
+                                <img
+                                    src={user.photoURL || 'https://via.placeholder.com/40'}
+                                    alt={user.displayName || 'User'}
+                                    title={user.displayName || 'User'}
+                                    className="w-10 h-10 rounded-full"
+                                />
+                            </div>
+                            <ul
+                                tabIndex={0}
+                                className="dropdown-content menu bg-base-100 text-black rounded-box w-56 mt-1 p-2 shadow-lg"
+                            >
+                                <li>
+                                    <p className="text-gray-600">
+                                        <strong className='flex items-center gap-1'><FaUser></FaUser> {user.displayName || 'User'}</strong>
+                                    </p>
+                                    <p className="text-gray-600">
+                                        <span className="text-xs">{user.email || 'No email'}</span>
+                                    </p>
+                                </li>
+                                <li><Link to="/dashboard">Dashboard</Link></li>
+                                <li><Link to="/offers">Offer Announcements</Link></li>
+                                <li>
+                                    <button onClick={handleLogout} className="btn btn-outline btn-sm">Logout</button>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className='flex items-center gap-3'>
+                            <button className='py-1 px-4 border rounded-md hover:bg-sky-800 hover:text-white'><Link to='/login'>Login</Link></button>
+                            <button className='hover:bg-sky-800 py-1 px-4 text-white border rounded-md'><Link to='/register'>Register</Link></button>
+                        </div>
+                    )
+                }
+            </div >
+        </div >
     );
 };
 

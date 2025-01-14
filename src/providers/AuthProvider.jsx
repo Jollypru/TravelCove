@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import auth from '../firebase/firebase.init';
 
 export const AuthContext = createContext(null);
+
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);

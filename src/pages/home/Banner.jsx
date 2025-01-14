@@ -8,7 +8,7 @@ const Banner = () => {
             className="hero"
             style={{
                 backgroundImage: `url(${bannerImage})`,
-                height: '85vh'
+                height: '80vh'
             }}>
             <div className="hero-overlay bg-opacity-25"></div>
             <div className="hero-content text-white text-center">

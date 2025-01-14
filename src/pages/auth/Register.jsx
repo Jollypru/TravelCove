@@ -60,7 +60,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Profile Photo</span>
                             </label>
-                            <input type="text" {...register('photo', { required: true })} placeholder="photo" name='photo' className="input input-bordered"/>
+                            <input type="url" {...register('photo', { required: true })} placeholder="photo" name='photo' className="input input-bordered"/>
                             {errors.photo && <span className='text-red-600'>Photo is required</span>}
                         </div>
                         <div className="form-control">
