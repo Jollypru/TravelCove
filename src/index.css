@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 
+li > .active{
+    text-decoration: underline;
+    
+}
