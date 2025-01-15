@@ -17,7 +17,7 @@ const DashboardLayout = () => {
 
     const links = <>
         <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
-        <li><NavLink to='/dashboard/myBookings' className="flex items-center gap-2"><LuTickets /> My Bookings</NavLink></li>
+        <li><NavLink to='/dashboard/my-bookings' className="flex items-center gap-2"><LuTickets /> My Bookings</NavLink></li>
         <li><NavLink to='/dashboard/addStories' className="flex items-center gap-2"><FaPencil /> Add Stories</NavLink></li>
         <li><NavLink to='/dashboard/manageStories' className="flex items-center gap-2"><FaClipboardList /> Manage Stories</NavLink></li>
         <li><NavLink to='/dashboard/tourGuideApplication' className="flex items-center gap-2"><AiOutlineUserAdd /> Join as Tour Guide</NavLink></li>

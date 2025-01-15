@@ -5,6 +5,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ManageProfile from "../pages/dashboard/manageProfile/ManageProfile";
+import MyBookings from "../pages/dashboard/myBookings/MyBookings";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path:'manageProfile',
                 element:<ManageProfile></ManageProfile>
+            },
+            {
+                path:'my-bookings',
+                element:<MyBookings></MyBookings>
             }
         ]
     }
