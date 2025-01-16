@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../components/shared/Footer';
-import { FaClipboardList, FaHome, FaUserEdit } from 'react-icons/fa';
+import { FaClipboardList, FaHome, FaUserEdit, FaUsers } from 'react-icons/fa';
 import { LuTickets } from 'react-icons/lu';
-import { FaPencil } from 'react-icons/fa6';
+import { FaPencil, FaUsersGear } from 'react-icons/fa6';
 import { AiOutlineUserAdd } from 'react-icons/ai';
+import { MdLocalOffer } from 'react-icons/md';
 
 
 const DashboardLayout = () => {
+
+    const isAdmin = true;
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -18,8 +21,8 @@ const DashboardLayout = () => {
     const links = <>
         <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
         <li><NavLink to='/dashboard/my-bookings' className="flex items-center gap-2"><LuTickets /> My Bookings</NavLink></li>
-        <li><NavLink to='/dashboard/addStories' className="flex items-center gap-2"><FaPencil /> Add Stories</NavLink></li>
-        <li><NavLink to='/dashboard/manageStories' className="flex items-center gap-2"><FaClipboardList /> Manage Stories</NavLink></li>
+        <li><NavLink to='/dashboard/add-stories' className="flex items-center gap-2"><FaPencil /> Add Stories</NavLink></li>
+        <li><NavLink to='/dashboard/manage-stories' className="flex items-center gap-2"><FaClipboardList /> Manage Stories</NavLink></li>
         <li><NavLink to='/dashboard/tourGuideApplication' className="flex items-center gap-2"><AiOutlineUserAdd /> Join as Tour Guide</NavLink></li>
     </>
 
@@ -29,7 +32,17 @@ const DashboardLayout = () => {
             {/* sidebar for larger device */}
             <div className={`w-64 min-h-screen p-2 md:p-5 bg-sky-800 text-white hidden md:block`}>
                 <ul className="space-y-2 mb-10">
-                    {links}
+                    {
+                        isAdmin ? <>
+                        <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
+                        <li><NavLink to='/dashboard/add-package' className="flex items-center gap-2"><MdLocalOffer />Add Package</NavLink></li>
+                        <li><NavLink to='/dashboard/manage-users' className="flex items-center gap-2"><FaUsers /> Manage Users</NavLink></li>
+                        <li><NavLink to='/dashboard/manage-candidates' className="flex items-center gap-2"><FaUsersGear /> Manage Candidates</NavLink></li>
+                        </>
+                            : <>
+                                {links}
+                            </>
+                    }
                 </ul>
                 <hr />
                 <ul className='mt-10'>
@@ -46,7 +59,17 @@ const DashboardLayout = () => {
                     &times; {/* Close icon */}
                 </button>
                 <ul className="space-y-2 mt-12">
-                   {links}
+                    {
+                        isAdmin ? <>
+                        </>
+                            : <>
+                                {links}
+                            </>
+                    }
+                </ul>
+                <hr />
+                <ul className='mt-10'>
+                    <li><NavLink to='/' className="flex items-center gap-2"><FaHome></FaHome> Home</NavLink></li>
                 </ul>
             </div>
 
@@ -56,7 +79,7 @@ const DashboardLayout = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
             </div>
-            
+
 
             <div className='flex flex-col w-full'>
                 <Outlet></Outlet>

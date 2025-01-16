@@ -10,9 +10,9 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/allTrips'>All Trips</NavLink></li>
         <li><NavLink>Community</NavLink></li>
         <li><NavLink>About Us</NavLink></li>
-        <li><NavLink>Trips</NavLink></li>
     </>
 
     const handleScroll = () => {

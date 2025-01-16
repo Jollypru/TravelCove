@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdPayment } from 'react-icons/md';
 
 const MyBookings = () => {
     return (
@@ -11,10 +12,11 @@ const MyBookings = () => {
                         <tr className='bg-sky-100'>
                             <th></th>
                             <th>Package</th>
-                            <th>Tour Price</th>
-                            <th>Tour Date</th>
                             <th>Tour Guide</th>
+                            <th>Tour Date</th>
+                            <th>Tour Price</th>
                             <th>Status</th>
+                            <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +28,9 @@ const MyBookings = () => {
                             <td>Blue</td>
                             <td>Blue</td>
                             <td>Blue</td>
+                            <td>
+                                <button className='text-xl text-center'><MdPayment></MdPayment></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,16 +2,13 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import auth from '../../firebase/firebase.init';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
 
     const {loginUser} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const googleProvider = new GoogleAuthProvider();
-
     const from = location.state?.from?.pathname || '/';
 
     const handleLogin = (e) => {
@@ -38,16 +35,6 @@ const Login = () => {
         
     }
 
-    const handleGoogleLogin = () => {
-        signInWithPopup(auth, googleProvider)
-        .then(result => {
-            const user = result.user;
-            navigate(from, {replace: true});
-        })
-        .catch(error => {
-            console.log('error during google login', error);
-        })
-    }
     return (
         <div className=" bg-base-200 min-h-screen mt-10 flex flex-col md:flex-row items-center justify-center gap-7 p-5">
             <div className='w-1/2'>
@@ -80,10 +67,7 @@ const Login = () => {
                             <button className="btn bg-sky-900 hover:bg-sky-950 text-white text-xl mb-3">Login</button>
                         </div>
 
-                        <div className='divider'>OR</div>
-                        <div className="form-control mt-4">
-                            <button onClick={handleGoogleLogin} className="btn border-sky-800 bg-white text-sky-800 text-lg mb-3">Login with Google</button>
-                        </div>
+                       <SocialLogin></SocialLogin>
                         <p className='text-center border border-gray-500 py-2 rounded-3xl'>New to this website? Please <Link to='/register' className='underline text-blue-600'>Register</Link> </p>
                     </form>
                 </div>

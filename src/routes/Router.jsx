@@ -6,6 +6,11 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ManageProfile from "../pages/dashboard/manageProfile/ManageProfile";
 import MyBookings from "../pages/dashboard/myBookings/MyBookings";
+import AddStories from "../pages/dashboard/AddStories/AddStories";
+import ManageStories from "../pages/dashboard/manageStories/ManageStories";
+import PrivateRoute from "./PrivateRoute";
+import ManageUsers from "../pages/dashboard/manageUsers/ManageUsers";
+import AllTrips from "../pages/auth/AllTrips/AllTrips";
 
 const router = createBrowserRouter([
     {
@@ -23,12 +28,16 @@ const router = createBrowserRouter([
         {
             path:'register',
             element:<Register></Register>
+        },
+        {
+            path: 'allTrips',
+            element: <AllTrips></AllTrips>
         }
       ]
     },
     {
         path:"dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path:'manageProfile',
@@ -37,6 +46,19 @@ const router = createBrowserRouter([
             {
                 path:'my-bookings',
                 element:<MyBookings></MyBookings>
+            },
+            {
+                path:'add-stories',
+                element:<AddStories></AddStories>
+            },
+            {
+                path: 'manage-stories',
+                element: <ManageStories></ManageStories>
+            },
+            // admin route
+            {
+                path: 'manage-users',
+                element: <ManageUsers></ManageUsers>
             }
         ]
     }
