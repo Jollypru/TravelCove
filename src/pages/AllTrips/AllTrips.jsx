@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React from 'react';
 import { FaDollarSign } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const AllTrips = () => {
 
@@ -29,7 +30,7 @@ const AllTrips = () => {
                                 <p className='text-gray-600'>{pkg.description}</p>
                                 <div className='flex items-center justify-between mt-3'>
                                     <p className='flex items-center gap-1'><FaDollarSign></FaDollarSign> {pkg.price}</p>
-                                    <button className='border border-sky-800 rounded-sm px-2 text-sky-600 mr-5'>Details</button>
+                                    <NavLink to={`/packageDetails/${pkg._id}`}><button className='border border-sky-800 rounded-sm px-2 text-sky-600 mr-5'>Details</button></NavLink>
                                 </div>
                             </div>
 
