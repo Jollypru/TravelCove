@@ -13,6 +13,7 @@ import ManageUsers from "../pages/dashboard/manageUsers/ManageUsers";
 import AllTrips from "../pages/AllTrips/AllTrips";
 import PackageDetails from "../pages/packageDetails/PackageDetails";
 import ApplyAsGuide from "../pages/dashboard/applyForTourGuide/ApplyAsGuide";
+import ManageCandidates from "../pages/dashboard/AdminDashboard/ManageCandidates/ManageCandidates";
 
 const router = createBrowserRouter([
     {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
             {
                 path: 'manage-users',
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: 'manage-candidates',
+                element: <ManageCandidates></ManageCandidates>
             }
         ]
     }
