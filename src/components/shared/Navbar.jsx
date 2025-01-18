@@ -75,8 +75,8 @@ const Navbar = () => {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} className="flex items-center gap-3 cursor-pointer">
                                 <img
-                                    src={user.photoURL || 'https://via.placeholder.com/40'}
-                                    alt={user.displayName || 'User'}
+                                    src={user.photoURL || <FaUser></FaUser>}
+                                    // alt={user.displayName || 'User'}
                                     title={user.displayName || 'User'}
                                     className="w-10 h-10 rounded-full"
                                 />

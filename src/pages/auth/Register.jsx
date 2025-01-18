@@ -3,12 +3,14 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import SocialLogin from './SocialLogin';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile} = useAuth();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
     
 
     const onSubmit = (data) => {

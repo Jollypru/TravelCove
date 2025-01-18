@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageUsers from "../pages/dashboard/manageUsers/ManageUsers";
 import AllTrips from "../pages/AllTrips/AllTrips";
 import PackageDetails from "../pages/packageDetails/PackageDetails";
+import ApplyAsGuide from "../pages/dashboard/applyForTourGuide/ApplyAsGuide";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
             {
                 path: 'manage-stories',
                 element: <ManageStories></ManageStories>
+            },
+            {
+                path: 'tourGuideApplication',
+                element: <ApplyAsGuide></ApplyAsGuide>
             },
             // admin route
             {
