@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import auth from '../firebase/firebase.init';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -36,10 +37,35 @@ const AuthProvider = ({ children }) => {
         })
     }
 
+    const fetchUserFromBackend = async(email) => {
+        try{
+            const response = await axios.get(`http://localhost:5000/users?email=${email}`);
+            return response.data;
+        }catch(error){
+            console.log('error fetching user from backend', error);
+            return null;
+        }
+    }
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+        const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
             if(currentUser){
-                setUser(currentUser)
+                try{
+                    const backendUser = await fetchUserFromBackend(currentUser.email);
+                    if(backendUser){
+                        setUser({
+                            ...currentUser,
+                            _id:  backendUser._id,
+                            role: backendUser.role || 'tourist'
+                        });
+                    }else{
+                        console.log('user not found in database');
+                        setUser(currentUser);
+                    }
+                }catch(error){
+                    console.log('error syncing user with backend', error);
+                    setUser(currentUser);
+                }
             }
             else{
                 setUser(null)

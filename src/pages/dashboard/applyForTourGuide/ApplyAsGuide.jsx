@@ -4,12 +4,15 @@ import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+
 const ApplyAsGuide = () => {
 
     const {user} = useAuth();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  
 
     const onSubmit = async (data) => {
+
         const guideApplication = {
             userId: user._id,
             name: user.displayName,
@@ -18,6 +21,9 @@ const ApplyAsGuide = () => {
             reason: data.reason,
             cvLink: data.cvLink
         }
+
+        console.log(guideApplication);
+
 
         try{
             const response = await axios.post('http://localhost:5000/guideApplications', guideApplication);
