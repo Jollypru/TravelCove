@@ -39,6 +39,27 @@ const ManageCandidates = () => {
             });
         }
     }
+
+    const handleReject = async (id) => {
+        try{
+            const response = await axiosSecure.delete(`/guideApplications/reject/${id}`)
+            if (response.status === 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Rejected!',
+                    text: 'The application has been Rejected.',
+                    confirmButtonText: 'OK',
+                });
+                refetch();
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error.response?.data?.message || 'Failed to accept the application.',
+            });
+        }
+    }
     return (
         <div className='min-h-screen p-5'>
             <h2 className='text-4xl font-semibold'>Manage All Candidates</h2>
@@ -71,7 +92,7 @@ const ManageCandidates = () => {
                                     <td className='border-r'>{application.role}</td>
                                     <td className='border-r flex flex-col items-center gap-1'>
                                         <button onClick={() => handleAccept(application._id)} className='border py-1 px-3 text-green-500 hover:bg-green-100'>Accept</button>
-                                        <button className='border py-1 px-3 text-red-500 hover:bg-red-200'>Reject</button>
+                                        <button onClick={() => handleReject(application._id)} className='border py-1 px-3 text-red-500 hover:bg-red-200'>Reject</button>
                                     </td>
                                 </tr>
                             ))
