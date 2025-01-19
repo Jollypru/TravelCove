@@ -14,6 +14,7 @@ import AllTrips from "../pages/AllTrips/AllTrips";
 import PackageDetails from "../pages/packageDetails/PackageDetails";
 import ApplyAsGuide from "../pages/dashboard/applyForTourGuide/ApplyAsGuide";
 import ManageCandidates from "../pages/dashboard/AdminDashboard/ManageCandidates/ManageCandidates";
+import GuideProfile from "../pages/GuideProfile/GuideProfile";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         {
             path: 'packageDetails/:id',
             element: <PackageDetails></PackageDetails>
+        },
+        {
+            path:'guideProfile/:id',
+            element: <GuideProfile></GuideProfile>
         }
       ]
     },
