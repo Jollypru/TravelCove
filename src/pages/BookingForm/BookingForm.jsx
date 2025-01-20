@@ -1,55 +1,57 @@
-import { useQuery } from '@tanstack/react-query';
+
 import React, { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-const BookingForm = ({packageDetails, guides}) => {
-    const {user} = useAuth();
+const BookingForm = ({ packageDetails, guides }) => {
+    const { user } = useAuth();
+    console.log(user);
 
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedGuide, setSelectedGuide] = useState('');
 
-   const handleBooking = async (e) => {
-    e.preventDefault();
-    if(!selectedGuide || !selectedDate){
-        Swal.fire({
-            icon: 'warning',
-            title: 'Incomplete Form',
-            text: 'Please select a guide and a tour date.',
-        });
-        return;
-    }
-   }
+    const handleBooking = async (e) => {
+        e.preventDefault();
+        if (!selectedGuide || !selectedDate) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Form',
+                text: 'Please select a guide and a tour date.',
+            });
+            return;
+        }
 
-   const bookingData = {
-    packageId: packageDetails._id,
-    packageName: packageDetails.title,
-    touristName: user.displayName,
-    touristEmail: user.email,
-    touristPhoto: user.photoURL,
-    price: packageDetails.price,
-    tourDate: selectedDate,
-    guideName: selectedGuide,
-    status: 'pending',
-   }
+        const bookingData = {
+            packageId: packageDetails._id,
+            packageName: packageDetails.title,
+            touristName: user.displayName,
+            touristEmail: user.email,
+            touristPhoto: user.photoURL,
+            price: packageDetails.price,
+            tourDate: selectedDate,
+            guideName: selectedGuide,
+            status: 'pending',
+        }
 
-   axios.post('http://localhost:5000/bookings', bookingData)
-   .then(res => {
-    if (response.status === 200) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Booking Confirmed',
-            text: 'Your booking request has been submitted successfully!',
-            confirmButtonText: 'Go to My Bookings',
-        }).then(() => {
-            window.location.href = '/dashboard/myBookings';
-        });
+        try {
+            const res = await axios.post('http://localhost:5000/bookings', bookingData);
+            if (res.status === 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Booking Confirmed',
+                    text: 'Your booking request has been submitted successfully!',
+                    confirmButtonText: 'Go to My Bookings',
+                }).then(() => {
+                    window.location.href = '/dashboard/my-bookings';
+                });
+            }
+        } catch (error) {
+            console.error('Error booking package:', error);
+        }
     }
-   })
 
     return (
         <div className='bg-base-100 rounded-md mt-5 p-5'>
@@ -73,12 +75,12 @@ const BookingForm = ({packageDetails, guides}) => {
                 </div>
                 <div className='form-control'>
                     <label>Tour Date</label>
-                   <DatePicker
-                    selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
-                    placeholderText='Select a date'
-                    className='input input-bordered'
-                   ></DatePicker>
+                    <DatePicker
+                        selected={selectedDate}
+                        onChange={(date) => setSelectedDate(date)}
+                        placeholderText='Select a date'
+                        className='input input-bordered'
+                    ></DatePicker>
                 </div>
                 <div className='form-control'>
                     <label>Tour Guide</label>

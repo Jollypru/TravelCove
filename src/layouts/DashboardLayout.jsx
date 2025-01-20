@@ -6,11 +6,12 @@ import { LuTickets } from 'react-icons/lu';
 import { FaPencil, FaUsersGear } from 'react-icons/fa6';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { MdLocalOffer } from 'react-icons/md';
+import useAdmin from '../hooks/useAdmin';
 
 
 const DashboardLayout = () => {
 
-    const isAdmin = true;
+    const [isAdmin] =  useAdmin();
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -34,10 +35,10 @@ const DashboardLayout = () => {
                 <ul className="space-y-2 mb-10">
                     {
                         isAdmin ? <>
-                        <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
-                        <li><NavLink to='/dashboard/add-package' className="flex items-center gap-2"><MdLocalOffer />Add Package</NavLink></li>
-                        <li><NavLink to='/dashboard/manage-users' className="flex items-center gap-2"><FaUsers /> Manage Users</NavLink></li>
-                        <li><NavLink to='/dashboard/manage-candidates' className="flex items-center gap-2"><FaUsersGear /> Manage Candidates</NavLink></li>
+                            <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
+                            <li><NavLink to='/dashboard/add-package' className="flex items-center gap-2"><MdLocalOffer />Add Package</NavLink></li>
+                            <li><NavLink to='/dashboard/manage-users' className="flex items-center gap-2"><FaUsers /> Manage Users</NavLink></li>
+                            <li><NavLink to='/dashboard/manage-candidates' className="flex items-center gap-2"><FaUsersGear /> Manage Candidates</NavLink></li>
                         </>
                             : <>
                                 {links}
@@ -61,6 +62,10 @@ const DashboardLayout = () => {
                 <ul className="space-y-2 mt-12">
                     {
                         isAdmin ? <>
+                            <li><NavLink to='/dashboard/manageProfile' className="flex items-center gap-2"><FaUserEdit /> Manage Profile</NavLink></li>
+                            <li><NavLink to='/dashboard/add-package' className="flex items-center gap-2"><MdLocalOffer />Add Package</NavLink></li>
+                            <li><NavLink to='/dashboard/manage-users' className="flex items-center gap-2"><FaUsers /> Manage Users</NavLink></li>
+                            <li><NavLink to='/dashboard/manage-candidates' className="flex items-center gap-2"><FaUsersGear /> Manage Candidates</NavLink></li>
                         </>
                             : <>
                                 {links}

@@ -39,10 +39,10 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`navbar max-w-screen-2xl mx-auto px-3  md:px-5 lg:px-10 fixed top-0 z-50 text-white ${isScrolled || !isHomePage ? 'bg-sky-800' : 'bg-transparent'} `}>
+        <div className={`navbar max-w-screen-2xl mx-auto px-3  md:px-5 lg:px-10 fixed top-0 z-50 ${isScrolled || !isHomePage ? 'bg-sky-800' : 'bg-transparent'} `}>
             <div className="navbar-start">
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5"
@@ -62,10 +62,10 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <a className="text-xl">TravelCove</a>
+                <a className="text-xl text-white">TravelCove</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="flex gap-8 px-1">
+                <ul className="flex gap-8 px-1 text-white">
                     {links}
                 </ul>
             </div>

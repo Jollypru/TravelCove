@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Select from 'react-select';
+import Swal from 'sweetalert2';
 
 
 const ManageUsers = () => {
@@ -35,6 +36,23 @@ const ManageUsers = () => {
         setSelectedRole(null);
         refetch(); // Fetch all users again
     };
+
+    const handleMakeAdmin = user => {
+        axiosSecure.patch(`/users/admin/${user._id}`)
+        .then(res => {
+            console.log(res.data);
+            if(res.data.modifiedCount > 0){
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `Made ${user.name} admin.`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+    }
     return (
         <div className='min-h-screen p-10'>
             <h3 className='text-4xl text-center font-bold mb-8'>Manage Users</h3>
@@ -93,7 +111,10 @@ const ManageUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>
-                                    <button className='btn'>{user.role}</button>
+                                    {
+                                        user.role === 'admin' ? <button className='btn'>Admin</button>: <button
+                                    onClick={() => handleMakeAdmin(user)}
+                                     className='btn'>{user.role}</button>}
                                 </td>
                             </tr>)
                         }

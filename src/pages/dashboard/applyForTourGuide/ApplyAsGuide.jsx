@@ -14,7 +14,6 @@ const ApplyAsGuide = () => {
     const onSubmit = async (data) => {
 
         const guideApplication = {
-            userId: user._id,
             name: user.displayName,
             email: user.email,
             title: data.title,
