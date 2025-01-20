@@ -7,7 +7,7 @@ import Guides from './guides/Guides';
 const TourismGuideSection = () => {
     return (
         <div className='my-20 max-w-screen-2xl mx-auto text-center'>
-            <Tabs defaultIndex={1} onSelect={(index) => console.log(index)}>
+            <Tabs defaultIndex={0} onSelect={(index) => console.log(index)}>
                 <TabList>
                     <Tab>Our Packages</Tab>
                     <Tab>Meet our Tour Guides</Tab>

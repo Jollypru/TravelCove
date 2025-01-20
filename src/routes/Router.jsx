@@ -9,7 +9,7 @@ import MyBookings from "../pages/dashboard/myBookings/MyBookings";
 import AddStories from "../pages/dashboard/AddStories/AddStories";
 import ManageStories from "../pages/dashboard/manageStories/ManageStories";
 import PrivateRoute from "./PrivateRoute";
-import ManageUsers from "../pages/dashboard/manageUsers/ManageUsers";
+import ManageUsers from "../pages/dashboard/AdminDashboard/manageUsers/ManageUsers";
 import AllTrips from "../pages/AllTrips/AllTrips";
 import PackageDetails from "../pages/packageDetails/PackageDetails";
 import ApplyAsGuide from "../pages/dashboard/applyForTourGuide/ApplyAsGuide";

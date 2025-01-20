@@ -10,7 +10,7 @@ import { MdLocalOffer } from 'react-icons/md';
 
 const DashboardLayout = () => {
 
-    const isAdmin = true;
+    const isAdmin = false;
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
