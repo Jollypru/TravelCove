@@ -8,37 +8,45 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Register = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile} = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
-    
+
 
     const onSubmit = (data) => {
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                updateUserProfile(data.name, data.photoURL)
-                .then(() => {
-                    const userInfo = {
-                        name: data.name, email: data.email
-                    }
-                    axiosPublic.post('/users', userInfo)
+                updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log('user added to the database');
-                        reset();
-                        Swal.fire({
-                            position: "top-center",
-                            icon: "success",
-                            title: "User created successfully!",
-                            showConfirmButton: false,
-                            timer: 1500
-                          });
-                          navigate('/');
-                    })                   
-                })
+                        const userInfo = {
+                            name: data.name, email: data.email, photo: data.photo, role: 'tourist'
+                        }
+                        console.log(userInfo);
+                        axiosPublic.post('/users', userInfo)
+                            .then(() => {
+                                console.log('user added to the database');
+                                reset();
+                                Swal.fire({
+                                    position: "top-center",
+                                    icon: "success",
+                                    title: "User created successfully!",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                navigate('/');
+                            })
+                    })
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Failed to register. Please try again later.',
+                });
+            })
     }
 
     return (
@@ -56,21 +64,21 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="name" {...register('name', { required: true })} placeholder="name" name='name' className="input input-bordered" />
+                            <input type="text" {...register('name', { required: 'Name is required' })} placeholder="name" className="input input-bordered" />
                             {errors.name && <span className='text-red-500'>Name is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" {...register('email', { required: true })} placeholder="email" name='email' className="input input-bordered"/>
+                            <input type="email" {...register('email', { required: 'Email is required' })} placeholder="email" className="input input-bordered" />
                             {errors.email && <span className='text-red-600'>Email is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Photo URL</span>
+                                <span className="label-text">Profile Photo </span>
                             </label>
-                            <input type="url" {...register('photo', { required: true })} placeholder="photo" name='photo' className="input input-bordered"/>
+                            <input type="url" {...register('photo', { required: 'Profile photo is required' })} placeholder="photo url" className="input input-bordered" />
                             {errors.photo && <span className='text-red-600'>Photo is required</span>}
                         </div>
                         <div className="form-control">
@@ -82,7 +90,7 @@ const Register = () => {
                                 minLength: 6,
                                 maxLength: 15,
                                 pattern: /(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-])/
-                            })} placeholder="password" name='password' className="input input-bordered"/>
+                            })} placeholder="password" name='password' className="input input-bordered" />
                             {errors.password?.type === 'required' && <p className='text-red-600'>Password is required</p>}
                             {errors.password?.type === 'minLength' && <p className='text-red-600'>Password must be 6 characters</p>}
                             {errors.password?.type === 'maxLength' && <p className='text-red-600'>Password must be less than 15 characters</p>}
