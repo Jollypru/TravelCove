@@ -15,6 +15,8 @@ import PackageDetails from "../pages/packageDetails/PackageDetails";
 import ApplyAsGuide from "../pages/dashboard/applyForTourGuide/ApplyAsGuide";
 import ManageCandidates from "../pages/dashboard/AdminDashboard/ManageCandidates/ManageCandidates";
 import GuideProfile from "../pages/GuideProfile/GuideProfile";
+import AdminRoute from "./AdminRoute";
+import AddPackages from "../pages/dashboard/AdminDashboard/AddPackages/AddPackages";
 
 const router = createBrowserRouter([
     {
@@ -74,14 +76,18 @@ const router = createBrowserRouter([
             // admin route
             {
                 path: 'manage-users',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: 'manage-candidates',
-                element: <ManageCandidates></ManageCandidates>
+                element: <AdminRoute><ManageCandidates></ManageCandidates></AdminRoute>
+            },
+            {
+                path: 'add-package',
+                element: <AddPackages></AddPackages>
             }
+            
         ]
     }
   ]);
-
 export default router;

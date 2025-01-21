@@ -31,12 +31,12 @@ const PackageDetails = () => {
             <div className='bg-base-100 p-5 grid grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
-                    <img className='row-span-2 h-96 w-full rounded-md' src={pkg.image} alt="" />
+                    <img className='row-span-2 h-96 w-full rounded-md' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
                     <div className='row-span-1 grid grid-cols-4 gap-2'>
                         {
                             pkg.galleryImages?.map((img, index) => (
                                 <div key={index}>
-                                    <img className='rounded-md' src={img} alt="" />
+                                    <img className='rounded-md' src={`http://localhost:5000/${img}`} alt="" />
                                 </div>
                             ))
                         }

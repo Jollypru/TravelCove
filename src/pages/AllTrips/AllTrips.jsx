@@ -24,7 +24,7 @@ const AllTrips = () => {
                 {
                     packages.map((pkg) => (
                         <div key={pkg._id} className='bg-base-100 p-3 flex flex-row justify-between gap-3 rounded-sm shadow-xl'>
-                            <img className='w-2/5' src={pkg.image} alt="" />
+                            <img className='w-2/5' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
                             <div>
                                 <h3 className='text-2xl my-4'>{pkg.title}</h3>
                                 <p className='text-gray-600'>{pkg.description}</p>

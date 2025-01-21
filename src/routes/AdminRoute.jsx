@@ -1,14 +1,21 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 
-const AdminRoute = ({children}) => {
-    const {user} = useAuth();
+const AdminRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    const [isAdmin, isAdminLoading] = useAdmin();
+    const location = useLocation();
 
-    if(user.role === 'admin'){
+    if (loading || isAdminLoading) {
+        <p className='text-center'><span className="loading loading-ring loading-lg"></span></p>
+    }
+    if (user && isAdmin) {
         return children;
     }
-    return <Navigate to='/login'></Navigate>
+
+    return <Navigate to='/login' state={{ from: location }}></Navigate>
 };
 
 export default AdminRoute;
