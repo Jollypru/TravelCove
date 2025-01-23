@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { Link, useParams } from 'react-router-dom';
 import BookingForm from '../BookingForm/BookingForm';
@@ -8,30 +8,50 @@ import { FaClipboardUser } from 'react-icons/fa6';
 
 const PackageDetails = () => {
     const { id } = useParams();
-    const { data: pkg, isLoading: isPackageLoading } = useQuery({
-        queryKey: ['packageDetails', id],
-        queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/packages/${id}`)
-            return res.data;
-        }
-    })
 
-    const { data: guides, isLoading: isGuideLoading } = useQuery({
-        queryKey: ['guides'],
-        queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/guides');
-            return res.data;
-        }
-    })
-    if (isPackageLoading || isGuideLoading) {
-        return <span className="loading loading-spinner loading-lg"></span>;
-    }
+    const [pkg, setPkg] = useState(null);
+    const [guides, setGuides] = useState([]);
+    useEffect(() => {
+        axios.get(`http://localhost:5000/packages/${id}`)
+        .then(res => {
+            console.log(res.data);
+            setPkg(res.data);
+        })
+        .catch(error => {
+            console.log('Error fetching package details', error);
+        })
+    }, [id])
+
+    useEffect(()=> {
+        axios.get('http://localhost:5000/guides')
+        .then(res => {
+            setGuides(res.data);
+        })
+    }, [])
+    // const { data: pkg, isLoading: isPackageLoading } = useQuery({
+    //     queryKey: ['packageDetails', id],
+    //     queryFn: async () => {
+    //         const res = await axios.get(`http://localhost:5000/packages/${id}`)
+    //         return res.data;
+    //     }
+    // })
+
+    // const { data: guides, isLoading: isGuideLoading } = useQuery({
+    //     queryKey: ['guides'],
+    //     queryFn: async () => {
+    //         const res = await axios.get('http://localhost:5000/guides');
+    //         return res.data;
+    //     }
+    // })
+    // if (isPackageLoading || isGuideLoading) {
+    //     return <span className="loading loading-spinner loading-lg"></span>;
+    // }
     return (
         <div className='min-h-screen p-4 pt-20 bg-base-200'>
             <div className='bg-base-100 p-5 grid grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
-                    <img className='row-span-2 h-96 w-full rounded-md' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
+                    <img className='row-span-2 h-96 w-full rounded-md' src={pkg.coverImage} alt="" />
                     <div className='row-span-1 grid grid-cols-4 gap-2'>
                         {
                             pkg.galleryImages?.map((img, index) => (

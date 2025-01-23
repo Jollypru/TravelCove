@@ -17,6 +17,7 @@ import ManageCandidates from "../pages/dashboard/AdminDashboard/ManageCandidates
 import GuideProfile from "../pages/GuideProfile/GuideProfile";
 import AdminRoute from "./AdminRoute";
 import AddPackages from "../pages/dashboard/AdminDashboard/AddPackages/AddPackages";
+import Community from "../pages/community/Community";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         {
             path:'guideProfile/:id',
             element: <GuideProfile></GuideProfile>
+        },
+        {
+            path: 'allStories',
+            element: <Community></Community>
         }
       ]
     },

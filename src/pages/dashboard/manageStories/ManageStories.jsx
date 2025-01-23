@@ -11,9 +11,9 @@ const ManageStories = () => {
     const [selectedStory, setSelectedStory] = useState(null);
 
     const { data: stories = [], isLoading, refetch } = useQuery({
-        queryKey: ['stories', user._id],
+        queryKey: ['stories', user.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/stories?userId=${user._id}`);
+            const res = await axios.get(`http://localhost:5000/stories?email=${user.email}`);
             return res.data;
         },
     });
