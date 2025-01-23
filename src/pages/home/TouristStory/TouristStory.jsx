@@ -92,7 +92,7 @@ const TouristStory = () => {
                     All Stories
                 </button>
                 <button
-                    onClick={() => navigate('/add-stories')}
+                    onClick={() => navigate('/dashboard/add-stories')}
                     className="py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700"
                 >
                     Add Story

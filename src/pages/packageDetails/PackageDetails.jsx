@@ -1,33 +1,73 @@
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { TbCurrencyTaka } from 'react-icons/tb';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import BookingForm from '../BookingForm/BookingForm';
 import { FaClipboardUser } from 'react-icons/fa6';
+import useAuth from '../../hooks/useAuth';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { toast, ToastContainer } from 'react-toastify';
+import DatePicker from 'react-datepicker';
 
 const PackageDetails = () => {
     const { id } = useParams();
-
+    const { user } = useAuth();
     const [pkg, setPkg] = useState(null);
     const [guides, setGuides] = useState([]);
+    const [tourDate, setTourDate] = useState(new Date());
+    const [selectedGuide, setSelectedGuide] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+
     useEffect(() => {
         axios.get(`http://localhost:5000/packages/${id}`)
-        .then(res => {
-            console.log(res.data);
-            setPkg(res.data);
+            .then(res => {
+                console.log(res.data);
+                setPkg(res.data);
+            })
+            .catch(error => {
+                console.log('Error fetching package details', error);
+            })
+
+
+        axios.get('http://localhost:5000/guides')
+            .then(res => {
+                setGuides(res.data);
+            })
+            .catch(error => {
+                console.log('Error fetching guides', error);
+            })
+    }, [id]);
+
+    const handleBooking = () => {
+        if(!user){
+            navigate('/login');
+            return;
+        }
+        const bookingData = {
+            packageName: pkg.title,
+            touristName: user.displayName,
+            touristEmail: user.email,
+            touristImage: user.photoURL,
+            price: pkg.price,
+            tourDate,
+            guideName: selectedGuide,
+            status: 'pending'
+        };
+
+        axiosPublic.post('http://localhost:5000/bookings', bookingData)
+        .then(() => {
+            toast.success('Booking successful!');
+            setShowModal(true);
         })
         .catch(error => {
-            console.log('Error fetching package details', error);
+            console.log('error creating booking:', error);
+            toast.error('Booking failed. Please try again');
         })
-    }, [id])
+    }
 
-    useEffect(()=> {
-        axios.get('http://localhost:5000/guides')
-        .then(res => {
-            setGuides(res.data);
-        })
-    }, [])
+
     // const { data: pkg, isLoading: isPackageLoading } = useQuery({
     //     queryKey: ['packageDetails', id],
     //     queryFn: async () => {
@@ -46,17 +86,21 @@ const PackageDetails = () => {
     // if (isPackageLoading || isGuideLoading) {
     //     return <span className="loading loading-spinner loading-lg"></span>;
     // }
+
+    if (!pkg) {
+        return <span className='loading loading-spinner loading-lg'></span>
+    }
     return (
         <div className='min-h-screen p-4 pt-20 bg-base-200'>
             <div className='bg-base-100 p-5 grid grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
-                    <img className='row-span-2 h-96 w-full rounded-md' src={pkg.coverImage} alt="" />
+                    <img className='row-span-2 h-96 w-full rounded-md' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
                     <div className='row-span-1 grid grid-cols-4 gap-2'>
                         {
-                            pkg.galleryImages?.map((img, index) => (
+                            pkg.galleryImages?.map((image, index) => (
                                 <div key={index}>
-                                    <img className='rounded-md' src={`http://localhost:5000/${img}`} alt="" />
+                                    <img className='rounded-md' src={`http://localhost:5000/${image}`} alt={`Gallery ${index}`} />
                                 </div>
                             ))
                         }
@@ -69,7 +113,7 @@ const PackageDetails = () => {
                         <p className='text-gray-500 mb-4'>{pkg.description}</p>
                         <span className='text-xl font-bold'>Price</span>
                         <hr className='w-1/3' />
-                        <p className='text-lg flex items-center'><TbCurrencyTaka />{pkg.price}</p>
+                        <p className='text-lg flex items-center'><TbCurrencyTaka />{pkg.price} Taka</p>
                     </div>
                     <div className='mt-5'>
                         <h2 className='text-2xl font-bold mb-4'>Tour plan</h2>
@@ -97,15 +141,79 @@ const PackageDetails = () => {
                             <img className="h-36 w-full object-cover rounded-md" src={guide.photo} alt={guide.name} />
                             <h3 className="mt-3 text-xl font-bold">{guide.name}</h3>
                             <p className="text-gray-600 flex items-center gap-1"><FaClipboardUser />{guide.role}</p>
-                            <button className="btn btn-link text-blue-500">
-                                <Link to={`/guideProfile/${guide._id}`}>View Profile</Link>
+                            <button
+                                onClick={() => navigate(`/guideProfile/${guide._id}`)}
+                                className="btn btn-link text-blue-500">
+                                View Profile
                             </button>
                         </div>
                     ))}
                 </div>
             </div>
 
-            <BookingForm packageDetails={pkg} guides={guides}></BookingForm>
+            <div className='bg-base-100 rounded-md mt-5 p-5'>
+                <h2 className='text-2xl font-semibold mb-5'>Book This {pkg.title} Package</h2>
+                <form  className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <div className='form-control'>
+                        <label>Package Name</label>
+                        <input type="text" value={pkg.title} className='input input-bordered' readOnly />
+                    </div>
+                    <div className='form-control'>
+                        <label>Tourist Name</label>
+                        <input type="text" value={user?.displayName || ''} className='input input-bordered' readOnly />
+                    </div>
+                    <div className='form-control'>
+                        <label>Tourist Email</label>
+                        <input type="email" value={user?.email || ''} className='input input-bordered' readOnly />
+                    </div>
+                    <div className='form-control'>
+                        <label>Tourist Photo</label>
+                        <input type="text" value={user?.photoURL || ''} className='input input-bordered' readOnly />
+                    </div>
+                    <div className='form-control'>
+                        <label>Package Price</label>
+                        <input type="number" value={pkg.price} className="input input-bordered" readOnly />
+                    </div>
+                    <div className='form-control'>
+                        <label>Tour Date</label>
+                        <DatePicker
+                            selected={tourDate}
+                            onChange={(date) => setTourDate(date)}
+                            placeholderText='Select a date'
+                            className='input input-bordered'
+                        ></DatePicker>
+                    </div>
+                    <div className='form-control'>
+                        <label>Tour Guide</label>
+                        <select value={selectedGuide} onChange={(e) => setSelectedGuide(e.target.value)} className='select select-bordered'>
+                            <option value="" disabled>Select a guide</option>
+                            {
+                                guides.map(guide => (
+                                    <option key={guide._id} value={guide.name}>{guide.name}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className='text-center mt-4'>
+                        <button type='button' onClick={handleBooking} className='py-1 px-5 border bg-sky-600 text-white rounded-md'>Book Now</button>
+                    </div>
+                </form>               
+            </div>
+            
+            {
+                showModal && (
+                    <div className='modal modal-open'>
+                        <div className="modal-box">
+                            <h3>Confirm Your Booking</h3>
+                            <p>Your booking has been successfully created!</p>
+                            <div className="modal-action">
+                                <button onClick={() => navigate('/dashboard/my-bookings')}>Go to My Bookings</button>
+                                <button onClick={() => setShowModal(false)}>Close</button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 };

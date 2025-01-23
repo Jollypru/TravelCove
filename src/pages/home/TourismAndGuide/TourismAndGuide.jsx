@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import 'react-tabs/style/react-tabs.css';
@@ -57,7 +57,7 @@ const TourismAndGuide = () => {
                                         <div className='flex justify-between mt-5'>
                                             <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>
                                             <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
-                                            <Link to={`/packageDetails/${pkg._id}`}><button><FaArrowUpRightFromSquare /></button></Link>
+                                            <button onClick={() => navigate(`/packageDetails/${pkg._id}`)}><FaArrowUpRightFromSquare /></button>
                                         </div>
 
                                     </div>
