@@ -37,7 +37,7 @@ const GuideProfile = () => {
                     />
                     <div>
                         <h2 className="text-2xl font-bold">{guide.name}</h2>
-                        <p className="text-gray-600">{guide.experience} years of experience</p>
+                        <p className="text-gray-600">{guide.experience || 0} years of experience</p>
                         <p className="text-gray-600">Specialized in: {guide.specialization || 'N/A'}</p>
                         <p className="text-gray-600">Contact: {guide.email}</p>
                     </div>
@@ -55,7 +55,7 @@ const GuideProfile = () => {
                         >
                             <img
                                 className="w-full h-40 object-cover rounded"
-                                src={story.image || 'https://via.placeholder.com/150'}
+                                src={story.image?.[0] || 'https://via.placeholder.com/150'}
                                 alt={story.title}
                             />
                             <h4 className="text-lg font-bold mt-2">{story.title}</h4>
