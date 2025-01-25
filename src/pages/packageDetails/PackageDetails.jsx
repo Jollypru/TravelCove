@@ -45,6 +45,8 @@ const PackageDetails = () => {
             navigate('/login');
             return;
         }
+        const selectedGuideData = guides.find((guide) => guide.name === selectedGuide);
+
         const bookingData = {
             packageName: pkg.title,
             touristName: user.displayName,
@@ -53,6 +55,7 @@ const PackageDetails = () => {
             price: pkg.price,
             tourDate,
             guideName: selectedGuide,
+            guideEmail: selectedGuideData?.email || '',
             status: 'pending'
         };
 
@@ -67,25 +70,6 @@ const PackageDetails = () => {
         })
     }
 
-
-    // const { data: pkg, isLoading: isPackageLoading } = useQuery({
-    //     queryKey: ['packageDetails', id],
-    //     queryFn: async () => {
-    //         const res = await axios.get(`http://localhost:5000/packages/${id}`)
-    //         return res.data;
-    //     }
-    // })
-
-    // const { data: guides, isLoading: isGuideLoading } = useQuery({
-    //     queryKey: ['guides'],
-    //     queryFn: async () => {
-    //         const res = await axios.get('http://localhost:5000/guides');
-    //         return res.data;
-    //     }
-    // })
-    // if (isPackageLoading || isGuideLoading) {
-    //     return <span className="loading loading-spinner loading-lg"></span>;
-    // }
 
     if (!pkg) {
         return <span className='loading loading-spinner loading-lg'></span>

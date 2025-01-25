@@ -105,7 +105,7 @@ const ManageProfile = () => {
                     <div className="mt-10 bg-white p-5 rounded shadow-md">
                         <h2 className="text-2xl font-bold mb-5">Admin Statistics</h2>
                         <ul className="list-disc list-inside">
-                            <li>Total Payment: <strong>{adminStats.totalPayment.toFixed(2)} USD</strong></li>
+                            <li>Total Payment: <strong>{adminStats.totalPayment.toFixed(2)} BDT</strong></li>
                             <li>Total Tour Guides: <strong>{adminStats.totalTourGuides}</strong></li>
                             <li>Total Packages: <strong>{adminStats.totalPackages}</strong></li>
                             <li>Total Clients: <strong>{adminStats.totalClients}</strong></li>

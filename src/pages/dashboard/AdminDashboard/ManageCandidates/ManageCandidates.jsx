@@ -29,7 +29,7 @@ const ManageCandidates = () => {
                     text: 'The application has been accepted.',
                     confirmButtonText: 'OK',
                 });
-                refetch();
+                refetch();                
             }
         } catch (error) {
             Swal.fire({

@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import AddPackages from "../pages/dashboard/AdminDashboard/AddPackages/AddPackages";
 import Community from "../pages/community/Community";
 import Payment from "../pages/dashboard/payment/Payment";
+import MyAssignedTours from "../pages/dashboard/guideDashboard/myAssignedTour/MyAssignedTour";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +96,12 @@ const router = createBrowserRouter([
             {
                 path: 'add-package',
                 element: <AddPackages></AddPackages>
+            },
+
+            // tour-guide route
+            {
+                path: 'my-assigned-tour',
+                element:<MyAssignedTours></MyAssignedTours>
             }
             
         ]
