@@ -80,7 +80,7 @@ const router = createBrowserRouter([
                 element: <ApplyAsGuide></ApplyAsGuide>
             },
             {
-                path: 'payment',
+                path: 'payment/:id',
                 element: <Payment></Payment>
             },
             // admin route
