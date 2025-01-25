@@ -203,12 +203,12 @@ const PackageDetails = () => {
             {
                 showModal && (
                     <div className='modal modal-open'>
-                        <div className="modal-box">
-                            <h3>Confirm Your Booking</h3>
+                        <div className="modal-box text-center">
+                            <h3 className='text-2xl font-semibold mb-2'>Confirm Your Booking!</h3>
                             <p>Your booking has been successfully created!</p>
                             <div className="modal-action">
-                                <button onClick={() => navigate('/dashboard/my-bookings')}>Go to My Bookings</button>
-                                <button onClick={() => setShowModal(false)}>Close</button>
+                                <button onClick={() => navigate('/dashboard/my-bookings')} className='px-3 py-1 bg-sky-600 text-white hover:bg-sky-800'>Go to My Bookings</button>
+                                <button onClick={() => setShowModal(false)} className=' py-1 px-3 border border-gray-500 hover:bg-gray-300'>Close</button>
                             </div>
                         </div>
                     </div>

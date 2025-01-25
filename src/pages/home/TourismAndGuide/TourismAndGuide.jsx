@@ -14,7 +14,7 @@ const TourismAndGuide = () => {
     const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
-        axiosPublic.get('/packages/random')
+        axios.get('http://localhost:5000/packages/random')
             .then(res => {
                 setRandomPackages(res.data);
             })

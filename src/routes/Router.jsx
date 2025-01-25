@@ -18,6 +18,7 @@ import GuideProfile from "../pages/GuideProfile/GuideProfile";
 import AdminRoute from "./AdminRoute";
 import AddPackages from "../pages/dashboard/AdminDashboard/AddPackages/AddPackages";
 import Community from "../pages/community/Community";
+import Payment from "../pages/dashboard/payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
             {
                 path: 'tourGuideApplication',
                 element: <ApplyAsGuide></ApplyAsGuide>
+            },
+            {
+                path: 'payment',
+                element: <Payment></Payment>
             },
             // admin route
             {
