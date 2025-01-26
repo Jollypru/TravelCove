@@ -22,7 +22,7 @@ const Community = () => {
         }));
     };
     return (
-        <div className="min-h-screen p-10 md:pt-20">
+        <div className="min-h-screen p-5 md:p-10 pt-20">
             <h2 className="text-4xl font-bold text-center mb-5">All Stories</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stories.map((story) => (

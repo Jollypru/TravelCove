@@ -4,29 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 
-
-const imageHostingKey = import.meta.env.VITE_Image_Hosting_Api_Key;
-const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 const AddStory = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const {user} =useAuth();
 
     const handleImageChange = (e) => {
         setImages(e.target.files);
-    };
-
-    const uploadImageToImgBB = async (imageFile) => {
-        const formData = new FormData();
-        formData.append('image', imageFile);
-
-        const response = await axios.post(imageHostingAPI, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
-
-        return response.data.data.display_url;
     };
 
     const handleSubmit = async (e) => {
@@ -40,25 +26,16 @@ const AddStory = () => {
             });
         }
 
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('userEmail', user?.email); 
+        Array.from(images).forEach((image) => formData.append('images', image));
+
         try {
-            // Upload all images to ImgBB and get URLs
-            const imageUrls = await Promise.all(
-                Array.from(images).map((image) => uploadImageToImgBB(image))
-            );
-
-            // Create story data with uploaded image URLs
-            const storyData = {
-                title,
-                description,
-                userId: user?._id, // Replace with actual user ID if needed
-                images: imageUrls,
-            };
-
-            // Save the story data to the backend
-            const response = await axios.post(
-                'https://assignment-12-server-tau-seven.vercel.app/stories',
-                storyData
-            );
+            const response = await axios.post('https://assignment-12-server-tau-seven.vercel.app/stories', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
 
             if (response.status === 200) {
                 Swal.fire({
@@ -76,34 +53,6 @@ const AddStory = () => {
                 text: error.response?.data?.message || 'Failed to add story.',
             });
         }
-
-        // const formData = new FormData();
-        // formData.append('title', title);
-        // formData.append('description', description);
-        // formData.append('userId', user?._id);
-        // Array.from(images).forEach((image) => formData.append('images', image));
-
-        // try {
-        //     const response = await axios.post('https://assignment-12-server-tau-seven.vercel.app/stories', formData, {
-        //         headers: { 'Content-Type': 'multipart/form-data' },
-        //     });
-
-        //     if (response.status === 200) {
-        //         Swal.fire({
-        //             icon: 'success',
-        //             title: 'Success',
-        //             text: 'Story added successfully!',
-        //         });
-        //         navigate('/dashboard/manage-stories');
-        //     }
-        // } catch (error) {
-        //     console.error('Error adding story:', error);
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Error',
-        //         text: error.response?.data?.message || 'Failed to add story.',
-        //     });
-        // }
     };
 
     return (
@@ -138,7 +87,7 @@ const AddStory = () => {
                         type="file"
                         multiple
                         onChange={handleImageChange}
-                        // accept="image/*"
+                        accept="image/*"
                         className="file-input file-input-bordered"
                         required
                     />

@@ -76,11 +76,11 @@ const PackageDetails = () => {
     }
     return (
         <div className='min-h-screen p-4 pt-20 bg-base-200'>
-            <div className='bg-base-100 p-5 grid grid-cols-8 gap-5'>
+            <div className='bg-base-100 p-5 grid md:grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
                     <img className='row-span-2 h-96 w-full rounded-md' src={pkg.coverImage} alt="" />
-                    <div className='row-span-1 grid grid-cols-4 gap-2'>
+                    <div className='row-span-1 grid grid-cols-2 md:grid-cols-4 gap-2'>
                         {
                             pkg.galleryImages?.map((image, index) => (
                                 <div key={index}>
@@ -93,7 +93,7 @@ const PackageDetails = () => {
                 {/* about tour section */}
                 <div className='col-span-3'>
                     <div>
-                        <h2 className='text-4xl font-bold mb-3'>{pkg.title}</h2>
+                        <h2 className='text-3xl md:text-4xl font-bold mb-3'>{pkg.title}</h2>
                         <p className='text-gray-500 mb-4'>{pkg.description}</p>
                         <span className='text-xl font-bold'>Price</span>
                         <hr className='w-1/3' />

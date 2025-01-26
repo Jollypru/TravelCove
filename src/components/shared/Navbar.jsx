@@ -92,7 +92,7 @@ const Navbar = () => {
                                         <span className="text-xs">{user.email || 'No email'}</span>
                                     </p>
                                 </li>
-                                <li><Link to="/dashboard">Dashboard</Link></li>
+                                <li><Link to="/dashboard/manageProfile">Dashboard</Link></li>
                                 <li><Link to="/offers">Offer Announcements</Link></li>
                                 <li>
                                     <button onClick={handleLogout} className="btn btn-outline btn-sm">Logout</button>

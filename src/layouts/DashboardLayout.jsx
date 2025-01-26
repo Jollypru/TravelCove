@@ -34,6 +34,9 @@ const DashboardLayout = () => {
         <li><NavLink to='/dashboard/add-package' className="flex items-center gap-2"><MdLocalOffer />Add Package</NavLink></li>
         <li><NavLink to='/dashboard/manage-users' className="flex items-center gap-2"><FaUsers /> Manage Users</NavLink></li>
         <li><NavLink to='/dashboard/manage-candidates' className="flex items-center gap-2"><FaUsersGear /> Manage Candidates</NavLink></li>
+        <li><NavLink to='/dashboard/my-assigned-tour' className="flex items-center gap-2"><LuTickets /> My Assigned Tour</NavLink></li>
+        <li><NavLink to='/dashboard/add-stories' className="flex items-center gap-2"><FaPencil /> Add Stories</NavLink></li>
+        <li><NavLink to='/dashboard/manage-stories' className="flex items-center gap-2"><FaClipboardList /> Manage Stories</NavLink></li>
     </>
 
     const guideLinks = <>

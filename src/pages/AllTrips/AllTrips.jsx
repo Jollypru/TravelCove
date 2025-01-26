@@ -20,12 +20,12 @@ const AllTrips = () => {
         return <span className="loading loading-spinner loading-lg"></span>
     }
     return (
-        <div className='bg-base-200 min-h-screen max-w-screen-xl mx-auto pt-20 pb-10 px-10'>
+        <div className='bg-base-200 min-h-screen max-w-screen-xl mx-auto pt-20 pb-10 px-3 md:px-10'>
             <h2 className='text-4xl text-center font-bold'>All Trips</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-8'>
                 {
                     packages.map((pkg) => (
-                        <div key={pkg._id} className='bg-base-100 p-3 flex flex-row justify-between gap-3 rounded-sm shadow-xl'>
+                        <div key={pkg._id} className='bg-base-100 p-3 flex flex-col md:flex-row justify-between gap-3 rounded-sm shadow-xl'>
                             <img className='w-2/5' src={pkg.coverImage} alt="" />
                             <div>
                                 <h3 className='text-2xl my-4'>{pkg.title}</h3>
