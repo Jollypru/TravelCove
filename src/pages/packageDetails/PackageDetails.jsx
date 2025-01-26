@@ -21,7 +21,7 @@ const PackageDetails = () => {
     const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/packages/${id}`)
+        axios.get(`https://assignment-12-server-tau-seven.vercel.app/packages/${id}`)
             .then(res => {
                 console.log(res.data);
                 setPkg(res.data);
@@ -31,7 +31,7 @@ const PackageDetails = () => {
             })
 
 
-        axios.get('http://localhost:5000/guides')
+        axios.get('https://assignment-12-server-tau-seven.vercel.app/guides')
             .then(res => {
                 setGuides(res.data);
             })
@@ -59,7 +59,7 @@ const PackageDetails = () => {
             status: 'pending'
         };
 
-        axiosPublic.post('http://localhost:5000/bookings', bookingData)
+        axiosPublic.post('bookings', bookingData)
         .then(() => {
             toast.success('Booking successful!');
             setShowModal(true);
@@ -79,12 +79,12 @@ const PackageDetails = () => {
             <div className='bg-base-100 p-5 grid grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
-                    <img className='row-span-2 h-96 w-full rounded-md' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
+                    <img className='row-span-2 h-96 w-full rounded-md' src={pkg.coverImage} alt="" />
                     <div className='row-span-1 grid grid-cols-4 gap-2'>
                         {
                             pkg.galleryImages?.map((image, index) => (
                                 <div key={index}>
-                                    <img className='rounded-md' src={`http://localhost:5000/${image}`} alt={`Gallery ${index}`} />
+                                    <img className='rounded-md' src={image} alt={`Gallery ${index}`} />
                                 </div>
                             ))
                         }

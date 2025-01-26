@@ -12,7 +12,7 @@ const Navbar = () => {
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allTrips'>All Trips</NavLink></li>
         <li><NavLink to='/allStories'>Community</NavLink></li>
-        <li><NavLink>About Us</NavLink></li>
+        <li><NavLink to='/about'>About Us</NavLink></li>
     </>
 
     const handleScroll = () => {
@@ -76,7 +76,6 @@ const Navbar = () => {
                             <div tabIndex={0} className="flex items-center gap-3 cursor-pointer">
                                 <img
                                     src={user.photoURL || <FaUser></FaUser>}
-                                    // alt={user.displayName || 'User'}
                                     title={user.displayName || 'User'}
                                     className="w-10 h-10 rounded-full"
                                 />
@@ -102,7 +101,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <div className='flex items-center gap-3'>
-                            <button className='py-1 px-4 border rounded-md hover:bg-sky-800 hover:text-white'><Link to='/login'>Login</Link></button>
+                            <button className='py-1 px-4 border rounded-md hover:bg-sky-800 text-white'><Link to='/login'>Login</Link></button>
                             <button className='hover:bg-sky-800 py-1 px-4 text-white border rounded-md'><Link to='/register'>Register</Link></button>
                         </div>
                     )

@@ -6,15 +6,16 @@ import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import 'react-tabs/style/react-tabs.css';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import { motion } from 'framer-motion';
 
 const TourismAndGuide = () => {
     const [randomPackages, setRandomPackages] = useState([]);
     const [randomGuides, setRandomGuides] = useState([]);
     const navigate = useNavigate();
-    const axiosPublic = useAxiosPublic();
+    
 
     useEffect(() => {
-        axios.get('http://localhost:5000/packages/random')
+        axios.get('https://assignment-12-server-tau-seven.vercel.app/packages/random')
             .then(res => {
                 setRandomPackages(res.data);
             })
@@ -24,7 +25,7 @@ const TourismAndGuide = () => {
     }, [])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/guides/random')
+        axios.get('https://assignment-12-server-tau-seven.vercel.app/guides/random')
             .then((res) => {
                 setRandomGuides(res.data);
             })
@@ -32,6 +33,8 @@ const TourismAndGuide = () => {
                 console.error('Error fetching random guides:', error);
             });
     }, []);
+
+    
 
     return (
         <div className='text-center my-10'>
@@ -43,55 +46,78 @@ const TourismAndGuide = () => {
                 </TabList>
 
                 <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 px-8'>
+                    <motion.div
+                        className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 px-8'
+                        initial={{ x: '100%' }}  // Start from right outside the screen
+                        animate={{ x: 0 }}  // Slide into place
+                        transition={{ duration: 0.8, type: 'spring', stiffness: 50 }}
+                    >
                         {
-                            randomPackages.map(pkg => (
+                            randomPackages.map((pkg, index) => (
                                 <div key={pkg._id} className='bg-base-200 rounded-md p-5'>
-                                    <img className='rounded-md h-[200px] w-full' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
-                                    <div className='mt-4'>
-                                        <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}
+                                    <motion.div
+                                        key={pkg._id}
+                                        className='bg-base-200 rounded-md p-5'
+                                        whileHover={{ scale: 1.05 }}  // Hover effect to enlarge the card slightly
+                                        transition={{ type: 'spring', stiffness: 300 }}
+                                    >
+                                        <img className='rounded-md h-[200px] w-full' src={pkg.coverImage} alt="" />
+                                        <div className='mt-4'>
+                                            <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}</h2>
+                                            <div className='flex justify-between mt-5'>
+                                                <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>
+                                                <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
+                                                <button onClick={() => navigate(`/packageDetails/${pkg._id}`)}><FaArrowUpRightFromSquare /></button>
+                                            </div>
 
-                                        </h2>
-
-
-                                        <div className='flex justify-between mt-5'>
-                                            <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>
-                                            <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
-                                            <button onClick={() => navigate(`/packageDetails/${pkg._id}`)}><FaArrowUpRightFromSquare /></button>
                                         </div>
-
-                                    </div>
+                                    </motion.div>
                                 </div>
                             ))
                         }
-                    </div>
+                    </motion.div>
+
                 </TabPanel>
 
                 <TabPanel>
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-4 rounded-md px-3 md:px-8'>
-                        {randomGuides.map((guide) => (
-                            <div key={guide._id} className="bg-white shadow-md rounded-lg overflow-hidden">
-                                <img
-                                    src={guide.photo}
-                                    alt={guide.name}
-                                    className="w-full h-40 object-cover"
-                                />
-                                <div className="p-4">
-                                    <h3 className="text-xl font-bold mb-2">{guide.name}</h3>
-                                    <p className="text-gray-600 mb-2">Email: {guide.email}</p>
-                                    <button
-                                        onClick={() => navigate(`/guideProfile/${guide._id}`)}
-                                        className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700"
+                    <motion.div
+                        className='grid grid-cols-1 md:grid-cols-3 gap-4 rounded-md px-3 md:px-8'
+                        initial={{ x: '-100%' }}  
+                        animate={{ x: 0 }}  
+                        transition={{ duration: 0.8, type: 'spring', stiffness: 50 }}
+                    >
+                      
+                            {randomGuides.map((guide, index) => (
+                                <div key={guide._id} className="bg-white shadow-md rounded-lg overflow-hidden">
+                                    <motion.div
+                                        key={guide._id}
+                                        className="bg-white shadow-md rounded-lg overflow-hidden"
+                                        whileHover={{ scale: 1.05 }}  
+                                        transition={{ type: 'spring', stiffness: 300 }}
                                     >
-                                        View Profile
-                                    </button>
+                                        <img
+                                            src={guide.photo}
+                                            alt={guide.name}
+                                            className="w-full h-40 object-cover"
+                                        />
+                                        <div className="p-4">
+                                            <h3 className="text-xl font-bold mb-2">{guide.name}</h3>
+                                            <p className="text-gray-600 mb-2">Email: {guide.email}</p>
+                                            <button
+                                                onClick={() => navigate(`/guideProfile/${guide._id}`)}
+                                                className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700"
+                                            >
+                                                View Profile
+                                            </button>
+                                        </div>
+                                        </motion.div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                       
+                    </motion.div>
                 </TabPanel>
             </Tabs>
-        </div>
+        </div >
     );
 };
 

@@ -3,13 +3,15 @@ import axios from 'axios';
 import React from 'react';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import { NavLink } from 'react-router-dom';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const AllTrips = () => {
+    const axiosPublic = useAxiosPublic();
 
     const { data: packages = [], isLoading } = useQuery({
         queryKey: ['packages'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/packages');
+            const res = await axiosPublic.get('/packages');
             console.log(res.data);
             return res.data;
         }
@@ -24,7 +26,7 @@ const AllTrips = () => {
                 {
                     packages.map((pkg) => (
                         <div key={pkg._id} className='bg-base-100 p-3 flex flex-row justify-between gap-3 rounded-sm shadow-xl'>
-                            <img className='w-2/5' src={`http://localhost:5000/${pkg.coverImage}`} alt="" />
+                            <img className='w-2/5' src={pkg.coverImage} alt="" />
                             <div>
                                 <h3 className='text-2xl my-4'>{pkg.title}</h3>
                                 <p className='text-gray-600'>{pkg.description}</p>

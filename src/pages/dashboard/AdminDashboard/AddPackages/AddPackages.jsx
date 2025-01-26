@@ -2,44 +2,65 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
+import useAxiosPublic from '../../../../hooks/useAxiosPublic';
 
+const image_hosting_key = import.meta.env.VITE_Image_Hosting_Api_Key;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddPackages = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [galleryImages, setGalleryImages] = useState([]);
 
-    const handleGalleryImages = (event) => {
-        const files = Array.from(event.target.files); 
-        setGalleryImages((prevGalleryImages) => [...prevGalleryImages, ...files]); 
+    const uploadImageToImgBB = async (imageFile) => {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        const response = await axios.post(image_hosting_api, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        return response.data.data.display_url;
     };
 
+
     const onSubmit = async (data) => {
-        const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('description', data.description);
-        formData.append('price', data.price);
-        formData.append('tourPlan', JSON.stringify(data.tourPlan.split('\n')));
-        formData.append('tourType', data.tourType);
+        console.log(data);
 
-        if (data.coverImage[0]) {
-            formData.append('coverImage', data.coverImage[0]);
-        }
-
-        galleryImages.forEach((image) => {
-            formData.append('galleryImages', image);
-        })
-
-        const response = await axios.post('http://localhost:5000/packages', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+        try {
+            const coverImage = await uploadImageToImgBB(data.coverImage[0]);
+            if (!coverImage) {
+              toast.error("Failed to upload cover image!");
+              return;
             }
-        })
-        if (response.status === 200) {
-            toast.success('Package added successfully!');
-            reset();
-            setGalleryImages([]);
-        } else {
-            toast.error('Failed to add package')
-        }
+
+            const galleryImageUrls = await Promise.all(
+                Array.from(galleryImages).map(image => uploadImageToImgBB(image))
+              );
+      
+      
+        
+            const packageData = {
+              title: data.title,
+              description: data.description,
+              price: parseFloat(data.price),
+              tourPlan: data.tourPlan.split("\n"),
+              tourType: data.tourType,
+              coverImage,
+              galleryImages: galleryImageUrls,
+            };
+      
+            const response = await axiosPublic.post("/packages", packageData);
+            if (response.status === 200) {
+              toast.success("Package added successfully!");
+              reset();
+              setGalleryImages([]);
+            } else {
+              toast.error("Failed to add package!");
+            }
+          } catch (error) {
+            console.error("Error adding package:", error);
+            toast.error("An error occurred while adding the package.");
+          }
+
+        
     };
 
     return (
@@ -90,19 +111,10 @@ const AddPackages = () => {
                     </div>
                     <div>
                         <label>Gallery Images:</label>
-                        <input type="file" multiple  {...register('galleryImages', { required: 'Gallery images are required' })} onChange={handleGalleryImages} className='ml-3'  />
+                        <input type="file" multiple  {...register('galleryImages', { required: 'Gallery images are required' })} onChange={(e) => setGalleryImages(e.target.files)} className='ml-3'  />
                         {errors.galleryImages && <p className="text-red-500 mt-1">{errors.galleryImages.message}</p>}
                     </div>
-                    {galleryImages.length > 0 && (
-                        <div className="mt-3">
-                            <h4 className="font-semibold">Selected Gallery Images:</h4>
-                            <ul className="list-disc list-inside">
-                                {Array.from(galleryImages).map((image, index) => (
-                                    <li key={index}>{image.name}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                    
                     <div className='text-center'>
                         <button type="submit" className="py-1 px-5 mt-5 bg-sky-700 rounded-sm text-white font-semibold">
                             Add Package

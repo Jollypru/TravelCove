@@ -9,7 +9,7 @@ const GuideProfile = () => {
     const { data: guide, isLoading, isError } = useQuery({
         queryKey: ['guideProfile', id],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/guides/${id}`);
+            const res = await axios.get(`https://assignment-12-server-tau-seven.vercel.app/guides/${id}`);
             return res.data;
         }
     });

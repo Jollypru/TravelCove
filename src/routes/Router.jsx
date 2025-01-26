@@ -20,6 +20,7 @@ import AddPackages from "../pages/dashboard/AdminDashboard/AddPackages/AddPackag
 import Community from "../pages/community/Community";
 import Payment from "../pages/dashboard/payment/Payment";
 import MyAssignedTours from "../pages/dashboard/guideDashboard/myAssignedTour/MyAssignedTour";
+import AboutUs from "../pages/aboutUs/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         {
             path: 'allStories',
             element: <Community></Community>
+        },
+        {
+            path: 'about', 
+            element: <AboutUs></AboutUs>
         }
       ]
     },

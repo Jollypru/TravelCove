@@ -13,14 +13,14 @@ const ManageStories = () => {
     const { data: stories = [], isLoading, refetch } = useQuery({
         queryKey: ['stories', user.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/stories?email=${user.email}`);
+            const res = await axios.get(`https://assignment-12-server-tau-seven.vercel.app/stories?email=${user.email}`);
             return res.data;
         },
     });
 
     const handleEditStory = async (updatedData) => {
         try {
-            await axios.patch(`http://localhost:5000/stories/${selectedStory._id}`, updatedData);
+            await axios.patch(`https://assignment-12-server-tau-seven.vercel.app/stories/${selectedStory._id}`, updatedData);
             setSelectedStory(null); // Close modal
             refetch(); // Refresh data
             Swal.fire("Success", "Story updated successfully", "success");
@@ -42,7 +42,7 @@ const ManageStories = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:5000/stories/${id}`)
+                axios.delete(`https://assignment-12-server-tau-seven.vercel.app/stories/${id}`)
                     .then(res => {
                         refetch();
                         if (res.data.modifiedCount > 0) {
@@ -76,7 +76,7 @@ const ManageStories = () => {
                             <p className="text-gray-600 mb-4">{story.description}</p>
                             <div className="grid grid-cols-2 gap-2">
                                 {story.images.map((img, index) => (
-                                    <img key={index} src={`http://localhost:5000/${img}`} alt={`Story ${index + 1}`} className="w-full h-36 object-cover rounded-md" />
+                                    <img key={index} src={`https://assignment-12-server-tau-seven.vercel.app/${img}`} alt={`Story ${index + 1}`} className="w-full h-36 object-cover rounded-md" />
                                 ))}
                             </div>
                             <div className="flex justify-between mt-4">

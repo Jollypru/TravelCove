@@ -34,7 +34,7 @@ const ManageUsers = () => {
         setSearchName('');
         setSearchEmail('');
         setSelectedRole(null);
-        refetch(); // Fetch all users again
+        refetch(); 
     };
 
     const handleMakeAdmin = user => {

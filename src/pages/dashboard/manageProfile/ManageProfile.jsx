@@ -19,7 +19,7 @@ const ManageProfile = () => {
 
     useEffect(() => {
         if(authUser?.email){
-            axios.get(`http://localhost:5000/users?email=${authUser.email}`)
+            axios.get(`https://assignment-12-server-tau-seven.vercel.app/users?email=${authUser.email}`)
             .then(res => {
                 setUser(res.data);
                 setEditedUser({
@@ -28,7 +28,7 @@ const ManageProfile = () => {
                 });
 
                 if (res.data.role === 'admin') {
-                    axios.get('http://localhost:5000/admin/stats')
+                    axiosSecure.get('/admin/stats')
                         .then((res) => {
                             setAdminStats(res.data);
                         })
@@ -52,7 +52,7 @@ const ManageProfile = () => {
 
     const handleUpdate = () => {
         if (editedUser.name && editedUser.photo) {
-            axios.patch(`http://localhost:5000/users/profile/${user._id}`,
+            axios.patch(`https://assignment-12-server-tau-seven.vercel.app/users/profile/${user._id}`,
                 {
                     name: editedUser.name,
                     photo: editedUser.photo,

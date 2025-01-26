@@ -11,7 +11,7 @@ const TouristStory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/stories/random')
+        axios.get('https://assignment-12-server-tau-seven.vercel.app/stories/random')
             .then(res => {
                 setStories(res.data)
             })
@@ -49,7 +49,7 @@ const TouristStory = () => {
                                 <h3 className="text-xl font-bold mb-2">{story.title}</h3>
                                 <p className="text-gray-600 mt-2">
                                     {expandedStories[story._id]
-                                        ? story.description // Show full description
+                                        ? story.description 
                                         : `${story.description.slice(0, 100)}...`}
                                     <button
                                         onClick={() => toggleStoryExpansion(story._id)}
@@ -61,9 +61,9 @@ const TouristStory = () => {
                             </div>
 
                             <div className="flex justify-between items-center mt-5">
-                                {/* Share Button */}
+                                
                                 <FacebookShareButton
-                                    url={window.location.href} // Current page URL
+                                    url={window.location.href} 
                                     quote={`Check out this amazing story: ${story.title}`}
                                     onClick={() => handleShare(window.location.href)}
                                     className='flex items-center gap-2'
@@ -71,7 +71,7 @@ const TouristStory = () => {
                                     <FacebookIcon size={32} round />
                                 </FacebookShareButton>
 
-                                {/* View All Stories */}
+                                
                                 <button
                                     onClick={() => navigate('/allStories')}
                                     className="py-1 px-3 bg-blue-600 text-white rounded hover:bg-blue-700"
