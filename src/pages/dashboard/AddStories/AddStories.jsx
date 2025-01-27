@@ -9,10 +9,11 @@ const AddStory = () => {
     const [description, setDescription] = useState('');
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
-    const {user} =useAuth();
+    const { user } = useAuth();
 
     const handleImageChange = (e) => {
-        setImages(e.target.files);
+        const newImages = Array.from(e.target.files);
+        setImages((prevImages) => [...prevImages, ...newImages]);
     };
 
     const handleSubmit = async (e) => {
@@ -29,13 +30,12 @@ const AddStory = () => {
         const formData = new FormData();
         formData.append('title', title);
         formData.append('description', description);
-        formData.append('userEmail', user?.email); 
+        formData.append('userEmail', user?.email);
         Array.from(images).forEach((image) => formData.append('images', image));
 
         try {
-            const response = await axios.post('https://assignment-12-server-beryl.vercel.app/stories', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
+            const response = await axios.post('https://assignment-12-server-beryl.vercel.app/stories', formData,
+            );
 
             if (response.status === 200) {
                 Swal.fire({

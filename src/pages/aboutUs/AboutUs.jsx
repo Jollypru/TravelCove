@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import image from '../../assets/IMG_20230211_171307.jpg'
 
 const AboutUs = () => {
     const projects = [
@@ -26,9 +27,9 @@ const AboutUs = () => {
                 <h1 className="text-4xl font-bold mb-6 text-center">About Me</h1>
                 <div className="flex flex-col md:flex-row gap-6 items-center">
                     <img
-                        src="https://via.placeholder.com/150" 
+                        src={image} 
                         alt="Jolly"
-                        className="w-36 h-36 rounded-full shadow-lg"
+                        className="w-40 h-40 rounded-full shadow-lg"
                     />
                     <div>
                         <h2 className="text-2xl font-semibold">Hi, I’m Jolly!</h2>

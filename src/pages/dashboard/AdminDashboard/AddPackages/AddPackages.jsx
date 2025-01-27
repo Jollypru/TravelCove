@@ -12,7 +12,8 @@ const AddPackages = () => {
 
   // Handle gallery image file selection
   const handleGalleryImages = (e) => {
-    setGalleryImages(Array.from(e.target.files));
+    const newImages = Array.from(e.target.files);
+  setGalleryImages((prevImages) => [...prevImages, ...newImages]);
   };
 
   // Upload a single image to ImgBB

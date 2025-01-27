@@ -57,20 +57,20 @@ const TourismAndGuide = () => {
                                 <div key={pkg._id} className='bg-base-200 rounded-md'>
                                     <motion.div
                                         key={pkg._id}
-                                        className='bg-base-200 rounded-md p-3'
+                                        className='bg-base-200 rounded-md p-5'
                                         whileHover={{ scale: 1.05 }}  // Hover effect to enlarge the card slightly
                                         transition={{ type: 'spring', stiffness: 300 }}
                                     >
                                         <img className='rounded-md h-[200px] w-full' src={pkg.coverImage} alt="" />
                                         <div className='mt-4 flex flex-col justify-between'>
-                                            <div className='md:h-32'>
+                                            <div className='md:h-32 mb-5'>
                                                 <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}</h2>
-                                                <p className='text-start text-gray-500'>{pkg.description}</p>
-                                            </div>
-                                            <div className='flex justify-between mt-5'>
-                                                <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>
+                                                <p className='text-start text-gray-500 mb-2'>{pkg.description}</p>
                                                 <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
-                                                <button onClick={() => navigate(`/packageDetails/${pkg._id}`)}><FaArrowUpRightFromSquare /></button>
+                                            </div>
+                                            <div className='flex justify-between items-center mt-5'>
+                                                <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>         
+                                                <button onClick={() => navigate(`/packageDetails/${pkg._id}`)} className='flex items-center gap-2 py-1 px-3 hover:border border-sky-200 '>View Details<FaArrowUpRightFromSquare /></button>
                                             </div>
 
                                         </div>
