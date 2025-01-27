@@ -8,6 +8,7 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import { MdLocalOffer } from 'react-icons/md';
 import useAdmin from '../hooks/useAdmin';
 import useTourGuide from '../hooks/useTourGuide';
+import { TbBrandStorybook } from 'react-icons/tb';
 
 
 const DashboardLayout = () => {
@@ -57,8 +58,10 @@ const DashboardLayout = () => {
                     }
                 </ul>
                 <hr />
-                <ul className='mt-10'>
+                <ul className='mt-10 space-y-2'>
                     <li><NavLink to='/' className="flex items-center gap-2"><FaHome></FaHome> Home</NavLink></li>
+                    <li><NavLink to='/allTrips' className="flex items-center gap-2"><MdLocalOffer /> All Trips</NavLink></li>
+                    <li><NavLink to='/allStories' className="flex items-center gap-2"><TbBrandStorybook /> Community</NavLink></li>
                 </ul>
             </div>
 
@@ -76,8 +79,10 @@ const DashboardLayout = () => {
                     }
                 </ul>
                 <hr />
-                <ul className='mt-10'>
+                <ul className='mt-10 space-y-2'>
                     <li><NavLink to='/' className="flex items-center gap-2"><FaHome></FaHome> Home</NavLink></li>
+                    <li><NavLink to='/allTrips' className="flex items-center gap-2"><MdLocalOffer /> All Trips</NavLink></li>
+                    <li><NavLink to='/allStories' className="flex items-center gap-2"><TbBrandStorybook /> Community</NavLink></li>
                 </ul>
             </div>
 

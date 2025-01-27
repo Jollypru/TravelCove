@@ -10,8 +10,8 @@ const ManageStories = () => {
     const { user } = useAuth();
     const [selectedStory, setSelectedStory] = useState(null);
 
-    const { data: stories = [], isLoading, refetch } = useQuery({
-        queryKey: ['stories', user.email],
+    const { data: stories , isLoading, refetch } = useQuery({
+        queryKey: ['stories', user?.email],
         queryFn: async () => {
             const res = await axios.get(`https://assignment-12-server-beryl.vercel.app/stories?email=${user.email}`);
             return res.data;
@@ -21,8 +21,8 @@ const ManageStories = () => {
     const handleEditStory = async (updatedData) => {
         try {
             await axios.patch(`https://assignment-12-server-beryl.vercel.app/stories/${selectedStory._id}`, updatedData);
-            setSelectedStory(null); // Close modal
-            refetch(); // Refresh data
+            setSelectedStory(null);
+            refetch(); 
             Swal.fire("Success", "Story updated successfully", "success");
         } catch (error) {
             console.error("Error updating story:", error);
@@ -76,7 +76,7 @@ const ManageStories = () => {
                             <p className="text-gray-600 mb-4">{story.description}</p>
                             <div className="grid grid-cols-2 gap-2">
                                 {story.images.map((img, index) => (
-                                    <img key={index} src={`https://assignment-12-server-tau-seven.vercel.app/${img}`} alt={`Story ${index + 1}`} className="w-full h-36 object-cover rounded-md" />
+                                    <img key={index} src={img} alt={`Story ${index + 1}`} className="w-full h-36 object-cover rounded-md" />
                                 ))}
                             </div>
                             <div className="flex justify-between mt-4">
