@@ -25,7 +25,7 @@ const ApplyAsGuide = () => {
 
 
         try{
-            const response = await axios.post('https://assignment-12-server-tau-seven.vercel.app/guideApplications', guideApplication);
+            const response = await axios.post('https://assignment-12-server-beryl.vercel.app/guideApplications', guideApplication);
             if(response.status === 200){
                 Swal.fire({
                     icon: 'success',

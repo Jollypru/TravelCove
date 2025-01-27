@@ -6,7 +6,7 @@ const Community = () => {
     const [stories, setStories] = useState([]);
     const [expandedStories, setExpandedStories] = useState({});
     useEffect(() => {
-        axios.get('https://assignment-12-server-tau-seven.vercel.app/stories')
+        axios.get('https://assignment-12-server-beryl.vercel.app/stories')
             .then((res) => {
                 setStories(res.data);
             })

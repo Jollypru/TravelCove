@@ -13,14 +13,14 @@ const ManageStories = () => {
     const { data: stories = [], isLoading, refetch } = useQuery({
         queryKey: ['stories', user.email],
         queryFn: async () => {
-            const res = await axios.get(`https://assignment-12-server-tau-seven.vercel.app/stories?email=${user.email}`);
+            const res = await axios.get(`https://assignment-12-server-beryl.vercel.app/stories?email=${user.email}`);
             return res.data;
         },
     });
 
     const handleEditStory = async (updatedData) => {
         try {
-            await axios.patch(`https://assignment-12-server-tau-seven.vercel.app/stories/${selectedStory._id}`, updatedData);
+            await axios.patch(`https://assignment-12-server-beryl.vercel.app/stories/${selectedStory._id}`, updatedData);
             setSelectedStory(null); // Close modal
             refetch(); // Refresh data
             Swal.fire("Success", "Story updated successfully", "success");
@@ -42,7 +42,7 @@ const ManageStories = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`https://assignment-12-server-tau-seven.vercel.app/stories/${id}`)
+                axios.delete(`https://assignment-12-server-beryl.vercel.app/stories/${id}`)
                     .then(res => {
                         refetch();
                         if (res.data.modifiedCount > 0) {

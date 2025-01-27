@@ -19,7 +19,7 @@ const ManageProfile = () => {
 
     useEffect(() => {
         if(authUser?.email){
-            axios.get(`https://assignment-12-server-tau-seven.vercel.app/users?email=${authUser.email}`)
+            axios.get(`https://assignment-12-server-beryl.vercel.app/users?email=${authUser.email}`)
             .then(res => {
                 setUser(res.data);
                 setEditedUser({
@@ -52,7 +52,7 @@ const ManageProfile = () => {
 
     const handleUpdate = () => {
         if (editedUser.name && editedUser.photo) {
-            axios.patch(`https://assignment-12-server-tau-seven.vercel.app/users/profile/${user._id}`,
+            axios.patch(`https://assignment-12-server-beryl.vercel.app/users/profile/${user._id}`,
                 {
                     name: editedUser.name,
                     photo: editedUser.photo,

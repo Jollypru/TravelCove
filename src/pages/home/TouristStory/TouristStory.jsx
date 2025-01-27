@@ -11,7 +11,7 @@ const TouristStory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('https://assignment-12-server-tau-seven.vercel.app/stories/random')
+        axios.get('https://assignment-12-server-beryl.vercel.app/stories/random')
             .then(res => {
                 setStories(res.data)
             })

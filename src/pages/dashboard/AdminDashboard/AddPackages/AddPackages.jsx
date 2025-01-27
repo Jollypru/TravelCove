@@ -49,7 +49,7 @@ const AddPackages = () => {
       };
   
       // Send POST request to backend
-      const response = await axios.post('https://assignment-12-server-tau-seven.vercel.app/packages', packageData);
+      const response = await axios.post('https://assignment-12-server-beryl.vercel.app/packages', packageData);
   
       if (response.status === 200) {
         Swal.fire('Success', 'Package added successfully!', 'success');

@@ -33,7 +33,7 @@ const AddStory = () => {
         Array.from(images).forEach((image) => formData.append('images', image));
 
         try {
-            const response = await axios.post('https://assignment-12-server-tau-seven.vercel.app/stories', formData, {
+            const response = await axios.post('https://assignment-12-server-beryl.vercel.app/stories', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 

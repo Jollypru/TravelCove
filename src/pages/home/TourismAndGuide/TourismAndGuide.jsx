@@ -12,10 +12,10 @@ const TourismAndGuide = () => {
     const [randomPackages, setRandomPackages] = useState([]);
     const [randomGuides, setRandomGuides] = useState([]);
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
-        axios.get('https://assignment-12-server-tau-seven.vercel.app/packages/random')
+        axios.get('https://assignment-12-server-beryl.vercel.app/packages/random')
             .then(res => {
                 setRandomPackages(res.data);
             })
@@ -25,7 +25,7 @@ const TourismAndGuide = () => {
     }, [])
 
     useEffect(() => {
-        axios.get('https://assignment-12-server-tau-seven.vercel.app/guides/random')
+        axios.get('https://assignment-12-server-beryl.vercel.app/guides/random')
             .then((res) => {
                 setRandomGuides(res.data);
             })
@@ -34,7 +34,7 @@ const TourismAndGuide = () => {
             });
     }, []);
 
-    
+
 
     return (
         <div className='text-center my-10'>
@@ -54,16 +54,19 @@ const TourismAndGuide = () => {
                     >
                         {
                             randomPackages.map((pkg, index) => (
-                                <div key={pkg._id} className='bg-base-200 rounded-md p-5'>
+                                <div key={pkg._id} className='bg-base-200 rounded-md'>
                                     <motion.div
                                         key={pkg._id}
-                                        className='bg-base-200 rounded-md p-5'
+                                        className='bg-base-200 rounded-md p-3'
                                         whileHover={{ scale: 1.05 }}  // Hover effect to enlarge the card slightly
                                         transition={{ type: 'spring', stiffness: 300 }}
                                     >
                                         <img className='rounded-md h-[200px] w-full' src={pkg.coverImage} alt="" />
-                                        <div className='mt-4'>
-                                            <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}</h2>
+                                        <div className='mt-4 flex flex-col justify-between'>
+                                            <div className='md:h-32'>
+                                                <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}</h2>
+                                                <p className='text-start text-gray-500'>{pkg.description}</p>
+                                            </div>
                                             <div className='flex justify-between mt-5'>
                                                 <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>
                                                 <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
@@ -82,38 +85,38 @@ const TourismAndGuide = () => {
                 <TabPanel>
                     <motion.div
                         className='grid grid-cols-1 md:grid-cols-3 gap-4 rounded-md px-3 md:px-8'
-                        initial={{ x: '-100%' }}  
-                        animate={{ x: 0 }}  
+                        initial={{ x: '-100%' }}
+                        animate={{ x: 0 }}
                         transition={{ duration: 0.8, type: 'spring', stiffness: 50 }}
                     >
-                      
-                            {randomGuides.map((guide, index) => (
-                                <div key={guide._id} className="bg-white shadow-md rounded-lg overflow-hidden">
-                                    <motion.div
-                                        key={guide._id}
-                                        className="bg-white shadow-md rounded-lg overflow-hidden"
-                                        whileHover={{ scale: 1.05 }}  
-                                        transition={{ type: 'spring', stiffness: 300 }}
-                                    >
-                                        <img
-                                            src={guide.photo}
-                                            alt={guide.name}
-                                            className="w-full h-40 object-cover"
-                                        />
-                                        <div className="p-4">
-                                            <h3 className="text-xl font-bold mb-2">{guide.name}</h3>
-                                            <p className="text-gray-600 mb-2">Email: {guide.email}</p>
-                                            <button
-                                                onClick={() => navigate(`/guideProfile/${guide._id}`)}
-                                                className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700"
-                                            >
-                                                View Profile
-                                            </button>
-                                        </div>
-                                        </motion.div>
-                                </div>
-                            ))}
-                       
+
+                        {randomGuides.map((guide, index) => (
+                            <div key={guide._id} className="bg-white shadow-md rounded-lg overflow-hidden">
+                                <motion.div
+                                    key={guide._id}
+                                    className="bg-white shadow-md rounded-lg overflow-hidden"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: 'spring', stiffness: 300 }}
+                                >
+                                    <img
+                                        src={guide.photo}
+                                        alt={guide.name}
+                                        className="w-full h-40 object-cover"
+                                    />
+                                    <div className="p-4">
+                                        <h3 className="text-xl font-bold mb-2">{guide.name}</h3>
+                                        <p className="text-gray-600 mb-2">Email: {guide.email}</p>
+                                        <button
+                                            onClick={() => navigate(`/guideProfile/${guide._id}`)}
+                                            className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700"
+                                        >
+                                            View Profile
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        ))}
+
                     </motion.div>
                 </TabPanel>
             </Tabs>

@@ -21,7 +21,7 @@ const PackageDetails = () => {
     const axiosPublic = useAxiosPublic();
 
     useEffect(() => {
-        axios.get(`https://assignment-12-server-tau-seven.vercel.app/packages/${id}`)
+        axios.get(`https://assignment-12-server-beryl.vercel.app/packages/${id}`)
             .then(res => {
                 console.log(res.data);
                 setPkg(res.data);
@@ -31,7 +31,7 @@ const PackageDetails = () => {
             })
 
 
-        axios.get('https://assignment-12-server-tau-seven.vercel.app/guides')
+        axios.get('https://assignment-12-server-beryl.vercel.app/guides')
             .then(res => {
                 setGuides(res.data);
             })
@@ -75,7 +75,7 @@ const PackageDetails = () => {
         return <span className='loading loading-spinner loading-lg'></span>
     }
     return (
-        <div className='min-h-screen p-4 pt-20 bg-base-200'>
+        <div className='min-h-screen md:p-4 pt-16 md:pt-20 bg-base-200'>
             <div className='bg-base-100 p-5 grid md:grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>
