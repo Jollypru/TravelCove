@@ -34,7 +34,7 @@ const TouristStory = () => {
         }));
     };
     return (
-        <div className="min-h-screen p-10">
+        <div className="min-h-screen px-10 mb-16">
             <h2 className="text-4xl font-bold text-center mb-8">Tourist Stories</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stories.map((story) => (

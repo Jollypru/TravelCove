@@ -6,34 +6,34 @@ const destinations = [
       id: 1,
       name: "Cox's Bazar",
       description: "The world's longest natural sea beach.",
-      image: "https://source.unsplash.com/600x400/?beach,sunset,sea",
+      image: "https://i.ibb.co.com/yTwmKCx/giant-238266.jpg",
     },
     {
       id: 2,
       name: "Sajek Valley",
       description: "The 'Cloud Kingdom' of Bangladesh.",
-      image: "https://source.unsplash.com/600x400/?mountains,clouds",
+      image: "https://i.ibb.co.com/KjGGfskt/Sajek-1024x600-jpg.webp",
     },
     {
       id: 3,
       name: "Sundarbans",
       description: "Home of the Royal Bengal Tiger.",
-      image: "https://source.unsplash.com/600x400/?forest,river",
+      image: "https://i.ibb.co.com/ZRYnXcKS/sun.jpg",
     },
     {
       id: 4,
       name: "Saint Martin's Island",
       description: "The only coral island in Bangladesh.",
-      image: "https://source.unsplash.com/600x400/?island,sea",
+      image: "https://i.ibb.co.com/pBbcZhFd/masudur-rahman.jpg",
     },
   ];
   
 const PopularDestinations = () => {
   return (
-    <section className="bg-gray-100 py-16">
-      <div className="max-w-6xl mx-auto px-5">
+    <section className="bg-white pb-16">
+      <div className=" px-10">
         {/* Section Title */}
-        <h2 className="text-4xl font-bold text-center mb-10">
+        <h2 className="text-3xl font-bold text-center mb-10">
           🌍 Popular Destinations
         </h2>
 

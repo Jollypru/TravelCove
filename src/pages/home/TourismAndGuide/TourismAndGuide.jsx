@@ -37,7 +37,7 @@ const TourismAndGuide = () => {
 
 
     return (
-        <div className='text-center my-10'>
+        <div className='text-center my-16'>
             <h2 className='text-4xl font-semibold mb-6'>Tourism and Travel Guides</h2>
             <Tabs>
                 <TabList>
