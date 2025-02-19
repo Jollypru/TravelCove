@@ -54,15 +54,15 @@ const ManageUsers = () => {
         })
     }
     return (
-        <div className='min-h-screen p-10 dark:text-white'>
+        <div className='min-h-screen p-5 lg:p-10 dark:text-white'>
             <h3 className='text-4xl text-center font-bold mb-8 dark:text-white'>Manage Users</h3>
             <h3 className='text-2xl mb-4'>Total Users: {users.length}</h3>
-            <div className="flex gap-4 mb-6">
+            <div className="grid grid-cols-2  lg:grid-cols-4 gap-4 mb-6">
                 <div>
                     <label className="block font-medium mb-2">Search by Name</label>
                     <input
                         type="text"
-                        className="input input-bordered"
+                        className="input input-sm md:input lg:input-sm input-bordered"
                         placeholder="Enter name"
                         value={searchName}
                         onChange={(e) => setSearchName(e.target.value)}
@@ -72,7 +72,7 @@ const ManageUsers = () => {
                     <label className="block font-medium mb-2">Search by Email</label>
                     <input
                         type="text"
-                        className="input input-bordered"
+                        className="input input-sm md:input lg:input-sm input-bordered"
                         placeholder="Enter email"
                         value={searchEmail}
                         onChange={(e) => setSearchEmail(e.target.value)}
@@ -85,7 +85,7 @@ const ManageUsers = () => {
                         value={selectedRole}
                         onChange={setSelectedRole}
                         placeholder="Select role"
-
+                        className='dark:text-black'
                     />
                 </div>
                 <div className='mt-8'>

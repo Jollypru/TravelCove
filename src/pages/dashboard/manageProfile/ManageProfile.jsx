@@ -25,7 +25,7 @@ const ManageProfile = () => {
             axios.get(`https://assignment-12-server-beryl.vercel.app/users?email=${authUser.email}`)
                 .then(res => {
                     setUser(res.data);
-    
+
                     // ✅ Only set editedUser when first loading, NOT on re-renders
                     setEditedUser(prev => ({
                         name: prev.name || res.data.name || '',
@@ -33,7 +33,7 @@ const ManageProfile = () => {
                         phone: prev.phone || res.data.phone || '',
                         address: prev.address || res.data.address || '',
                     }));
-    
+
                     if (res.data.role === 'admin') {
                         axiosSecure.get('/admin/stats')
                             .then(res => setAdminStats(res.data))
@@ -46,7 +46,7 @@ const ManageProfile = () => {
                 });
         }
     }, [authUser?.email, navigate]);
-    
+
 
     // ✅ Handle input changes
     const handleInputChange = (e) => {
@@ -56,26 +56,26 @@ const ManageProfile = () => {
 
     // ✅ Fix update function
     const handleUpdate = () => {
-        if (editedUser.name && editedUser.photo ) {
+        if (editedUser.name && editedUser.photo) {
             axiosSecure.patch(`/users/profile/${user._id}`, editedUser, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('access-token')}`  // ✅ Add token
                 }
             })
-            .then(() => {
-                console.log('Profile updated successfully in backend');
-                setUser((prev) => ({
-                    ...prev,
-                    ...editedUser  // ✅ Ensure state updates with new data
-                }));
-                setIsEditModalOpen(false);
-            })
-            .catch((error) => {
-                console.error('Error updating profile:', error);
-            });
+                .then(() => {
+                    console.log('Profile updated successfully in backend');
+                    setUser((prev) => ({
+                        ...prev,
+                        ...editedUser  // ✅ Ensure state updates with new data
+                    }));
+                    setIsEditModalOpen(false);
+                })
+                .catch((error) => {
+                    console.error('Error updating profile:', error);
+                });
         }
     };
-    
+
 
     if (!user) {
         return (
@@ -86,32 +86,15 @@ const ManageProfile = () => {
     }
 
     return (
-        <div className="min-h-screen bg-base-200 p-5">
+        <div className="min-h-screen bg-base-200 p-5 dark:bg-gray-800">
             <div className="w-full p-5">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold mb-3">Welcome, {user.name || 'User'}!</h1>
-                    <p className="text-gray-600">Manage your profile and preferences here.</p>
-                </div>
-                <div className='flex items-center gap-4'>
-                    <img
-                        src={user.photo || 'https://via.placeholder.com/100'}
-                        alt="User Profile"
-                        className="w-24 h-24 rounded-full mb-3"
-                    />
-                    <div>
-                        <h2>{user.name || 'N/A'}</h2>
-                        <p>{user.role || 'Tourist'}</p>
-                    </div>
-                </div>
-                <div className="bg-white">
-                    <p className="text-lg font-semibold">{user.name || 'N/A'}</p>
-                    <p className="text-gray-500 flex items-center gap-2"><MdMailOutline /> {user.email || 'N/A'}</p>
-                    <p className="text-gray-500 flex items-center gap-2"><MdPhone /> {user.phone || 'N/A'}</p>
-                    <p className="text-gray-500 flex items-center gap-2"><MdLocationOn /> {user.address || 'N/A'}</p>
-                    <p className="text-gray-500 mt-2">Role: {user.role || 'Tourist'}</p>
+                    <h1 className="text-4xl font-bold mb-3 dark:text-white">Welcome, {user.name || 'User'}!</h1>
+                    <p className="text-gray-600 dark:text-white">Manage your profile and preferences here.</p>
                 </div>
 
-                <div className="flex items-center justify-center gap-4 mt-5">
+                
+                <div className="flex items-center justify-end gap-4 mt-5">
                     <button
                         onClick={() => setIsEditModalOpen(true)}
                         className="py-2 px-4 rounded-md bg-blue-800 hover:bg-blue-900 text-white"
@@ -119,6 +102,22 @@ const ManageProfile = () => {
                         Edit Profile
                     </button>
                 </div>
+                
+                <div className="bg-white p-5 flex items-center gap-10 mt-5">
+                    <img
+                        src={user.photo || 'https://via.placeholder.com/100'}
+                        alt="User Profile picture"
+                        className="w-24 h-24 rounded-full mb-3"
+                    />
+                    <div>
+                        <p className="text-lg font-semibold">{user.name || 'N/A'}</p>
+                        <p className="text-gray-500 flex items-center gap-2"><MdMailOutline /> {user.email || 'N/A'}</p>
+                        <p className="text-gray-500 flex items-center gap-2"><MdPhone /> {user.phone || 'N/A'}</p>
+                        <p className="text-gray-500 flex items-center gap-2"><MdLocationOn /> {user.address || 'N/A'}</p>
+                        <p className="text-gray-500 mt-2">Role: {user.role || 'Tourist'}</p>
+                    </div>
+                </div>
+
 
                 {user.role === 'admin' && adminStats && (
                     <div className="mt-10 bg-white p-5 rounded shadow-md">
