@@ -22,7 +22,7 @@ const AboutUs = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-base-200 p-8 pt-20">
+        <div className="min-h-screen bg-base-200 p-8 pt-20 dark:bg-gray-800">
             <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
                 <h1 className="text-4xl font-bold mb-6 text-center">About Me</h1>
                 <div className="flex flex-col md:flex-row gap-6 items-center">

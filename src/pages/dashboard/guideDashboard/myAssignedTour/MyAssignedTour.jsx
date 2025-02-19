@@ -68,10 +68,10 @@ const MyAssignedTour = () => {
     }
 
     return (
-        <div className='min-h-screen p-5'>
+        <div className='min-h-screen p-5 dark:text-white'>
             <h2 className='text-4xl font-semibold mb-5'>My Assigned Tour</h2>
             <div className="overflow-x-auto">
-                <table className="table border border-collapse">
+                <table className="table border border-collapse dark:text-white">
                     {/* head */}
                     <thead>
                         <tr className='bg-sky-100'>

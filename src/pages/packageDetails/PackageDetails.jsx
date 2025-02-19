@@ -75,7 +75,7 @@ const PackageDetails = () => {
         return <span className='loading loading-spinner loading-lg'></span>
     }
     return (
-        <div className='min-h-screen md:p-4 pt-16 md:pt-20 bg-base-200'>
+        <div className='min-h-screen md:p-4 pt-16 md:pt-20 bg-base-200 dark:bg-gray-800'>
             <div className='bg-base-100 p-5 grid md:grid-cols-8 gap-5'>
                 {/* gallery section */}
                 <div className='col-span-5 grid grid-rows-3 gap-3'>

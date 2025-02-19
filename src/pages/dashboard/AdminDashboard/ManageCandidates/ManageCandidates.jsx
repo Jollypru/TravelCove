@@ -61,7 +61,7 @@ const ManageCandidates = () => {
         }
     }
     return (
-        <div className='min-h-screen p-5'>
+        <div className='min-h-screen p-5 dark:text-white'>
             <h2 className='text-4xl font-semibold'>Manage All Candidates</h2>
             <p className='mt-3 text-xl'>Total Application: {applications.length}</p>
             <div className="overflow-x-auto border rounded-md mt-4">
@@ -100,6 +100,11 @@ const ManageCandidates = () => {
 
                     </tbody>
                 </table>
+                {
+                    applications.length === 0 && (
+                        <p className='p-3'>No application for tour-guide right now. </p>
+                    )
+                }
             </div>
         </div>
     );

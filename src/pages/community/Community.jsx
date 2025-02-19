@@ -22,9 +22,9 @@ const Community = () => {
         }));
     };
     return (
-        <div className="min-h-screen p-5 md:p-10 pt-20 md:pt-24">
-            <h2 className="text-4xl font-bold text-center mb-5">All Stories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="min-h-screen p-5 md:p-10 pt-20 md:pt-24 dark:bg-gray-800">
+            <h2 className="text-4xl font-bold text-center mb-5 dark:text-white">All Stories</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stories.map((story) => (
                     <div key={story._id} className="bg-white rounded shadow-md pb-3 overflow-hidden">
                         <img

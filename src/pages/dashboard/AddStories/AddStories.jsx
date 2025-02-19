@@ -90,8 +90,8 @@ const AddStory = () => {
   };
 
   return (
-    <div className="min-h-screen p-5 bg-base-200">
-      <h2 className="text-3xl font-bold text-center mb-5">Add a Story</h2>
+    <div className="min-h-screen p-5 bg-base-200 dark:bg-gray-800">
+      <h2 className="text-3xl font-bold text-center mb-5 dark:text-white">Add a Story</h2>
       <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white p-5 shadow-md rounded-md">
         <div className="form-control mb-4">
           <label className="label">Title</label>

@@ -54,8 +54,8 @@ const ManageUsers = () => {
         })
     }
     return (
-        <div className='min-h-screen p-10'>
-            <h3 className='text-4xl text-center font-bold mb-8'>Manage Users</h3>
+        <div className='min-h-screen p-10 dark:text-white'>
+            <h3 className='text-4xl text-center font-bold mb-8 dark:text-white'>Manage Users</h3>
             <h3 className='text-2xl mb-4'>Total Users: {users.length}</h3>
             <div className="flex gap-4 mb-6">
                 <div>

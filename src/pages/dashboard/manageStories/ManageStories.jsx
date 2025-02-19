@@ -64,8 +64,8 @@ const ManageStories = () => {
     }
 
     return (
-        <div className="min-h-screen p-5 bg-base-200">
-            <h2 className="text-3xl font-bold text-center mb-5">Manage Your Stories</h2>
+        <div className="min-h-screen p-5 bg-base-200 dark:bg-gray-800">
+            <h2 className="text-3xl font-bold text-center mb-5 dark:text-white">Manage Your Stories</h2>
             {stories.length === 0 ? (
                 <p className="text-center">You have no stories yet.</p>
             ) : (

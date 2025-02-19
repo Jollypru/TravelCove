@@ -66,8 +66,8 @@ const AddPackages = () => {
 
   return (
     <div className='min-h-screen p-10'>
-      <h2 className='text-4xl font-bold mb-5 text-center'>Add Packages</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <h2 className='text-4xl font-bold mb-5 text-center dark:text-white'>Add Packages</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className='dark:bg-gray-200 p-5'>
         <div className='form-control mb-4'>
           <label>Package Name</label>
           <input type="text" {...register('title', { required: 'Package name is required' })} className='input input-bordered' placeholder='Enter package name' />
@@ -118,7 +118,7 @@ const AddPackages = () => {
         </div>
 
         <div className='text-center'>
-          <button type="submit" className="btn btn-primary">Add Package</button>
+          <button type="submit" className="py-2 px-4 text-white rounded-md bg-sky-800">Add Package</button>
         </div>
       </form>
     </div>

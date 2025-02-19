@@ -31,8 +31,8 @@ const AllTrips = () => {
     });
 
     return (
-        <div className='bg-base-200 min-h-screen pt-20 pb-10 px-3 md:px-10'>
-            <h2 className='text-4xl text-center font-bold'>All Trips</h2>
+        <div className='bg-base-200 min-h-screen pt-20 pb-10 px-3 md:px-10 dark:bg-gray-800'>
+            <h2 className='text-4xl text-center font-bold dark:text-white'>All Trips</h2>
 
             <div className='flex justify-end my-4'>
                 <select 
