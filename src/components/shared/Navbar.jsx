@@ -39,7 +39,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className={`navbar max-w-screen-2xl mx-auto px-3  md:px-5 lg:px-10 fixed top-0 z-50 ${isScrolled || !isHomePage ? 'bg-sky-800' : 'bg-transparent'} `}>
+        <div className={`navbar px-3  md:px-5 lg:px-10 fixed top-0 z-50 ${isScrolled || !isHomePage ? 'bg-sky-800' : 'bg-transparent'} `}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-white">
@@ -92,6 +92,7 @@ const Navbar = () => {
                                         <span className="text-xs">{user.email || 'No email'}</span>
                                     </p>
                                 </li>
+                                <li><Link to="/dashboard/manageProfile">Profile</Link></li>
                                 <li><Link to="/dashboard/manageProfile">Dashboard</Link></li>
                                 <li><Link to="/offers">Offer Announcements</Link></li>
                                 <li>

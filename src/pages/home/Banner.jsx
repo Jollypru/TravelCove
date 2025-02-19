@@ -1,8 +1,10 @@
 import React from 'react';
 import bannerImage from '../../assets/Saint_Martins_Island_with_boats_in_foreground.jpg';
 import { FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
+    const navigate = useNavigate();
     return (
         <div
             className="hero"
@@ -17,7 +19,7 @@ const Banner = () => {
                     <p className="mb-2 lg:mb-8">
                     Explore the beautiful landscapes and unique attractions of Bangladesh with our travel guide.
                     </p>
-                    <button className="btn btn-sm rounded-md hover:bg-sky-900 font-normal lg:btn-md lg:text-base border-0 bg-sky-800 text-white">Get Started <FaArrowRight></FaArrowRight></button>
+                    <button onClick={() => navigate('/allTrips')} className="btn btn-sm rounded-md hover:bg-sky-900 font-normal lg:btn-md lg:text-base border-0 bg-sky-800 text-white">Get Started <FaArrowRight></FaArrowRight></button>
                 </div>
             </div>
         </div>
