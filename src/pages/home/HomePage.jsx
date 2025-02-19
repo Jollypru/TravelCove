@@ -8,7 +8,7 @@ import Testimonials from './TestimonialSection/TestimonialSection';
 
 const HomePage = () => {
     return (
-        <div>
+        <div className='dark:bg-gray-900 text-black dark:text-white'>
             <Banner></Banner>
             <TourismAndGuide></TourismAndGuide>
             <TouristStory></TouristStory>

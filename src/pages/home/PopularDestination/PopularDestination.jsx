@@ -30,10 +30,10 @@ const destinations = [
   
 const PopularDestinations = () => {
   return (
-    <section className="bg-white pb-16">
+    <section className="bg-white py-16">
       <div className=" px-10">
         {/* Section Title */}
-        <h2 className="text-3xl font-bold text-center mb-10">
+        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-10 dark:text-black">
           🌍 Popular Destinations
         </h2>
 

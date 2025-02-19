@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { FaUser } from 'react-icons/fa';
+import ThemeToggle from '../ThemeToggle';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -70,6 +71,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex gap-3">
+                <ThemeToggle></ThemeToggle>
                 {
                     user ? (
                         <div className="dropdown dropdown-end">
@@ -102,6 +104,7 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <div className='flex items-center gap-3'>
+                            
                             <button className='py-1 px-4 border rounded-md hover:bg-sky-800 text-white'><Link to='/login'>Login</Link></button>
                             <button className='hover:bg-sky-800 py-1 px-4 text-white border rounded-md'><Link to='/register'>Register</Link></button>
                         </div>

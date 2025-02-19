@@ -36,7 +36,7 @@ const TouristStory = () => {
     return (
         <div className="min-h-screen p-10">
             <h2 className="text-4xl font-bold text-center mb-8">Tourist Stories</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stories.map((story) => (
                     <div key={story._id} className="bg-white rounded shadow-md overflow-hidden">
                         <img
@@ -46,7 +46,7 @@ const TouristStory = () => {
                         />
                         <div className="p-4">
                             <div className=''>
-                                <h3 className="text-xl font-bold mb-2">{story.title}</h3>
+                                <h3 className="text-xl font-bold mb-2 dark:text-black">{story.title}</h3>
                                 <p className="text-gray-600 mt-2">
                                     {expandedStories[story._id]
                                         ? story.description 
@@ -66,8 +66,8 @@ const TouristStory = () => {
                                     url={window.location.href} 
                                     quote={`Check out this amazing story: ${story.title}`}
                                     onClick={() => handleShare(window.location.href)}
-                                    className='flex items-center gap-2'
-                                >   Share on:
+                                    className='flex items-center gap-2 '
+                                >   <span className='dark:text-black'>Share on:</span>
                                     <FacebookIcon size={32} round />
                                 </FacebookShareButton>
 

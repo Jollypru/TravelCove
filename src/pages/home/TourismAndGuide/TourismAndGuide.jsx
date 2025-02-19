@@ -64,13 +64,13 @@ const TourismAndGuide = () => {
                                         <img className='rounded-md h-[200px] w-full' src={pkg.coverImage} alt="" />
                                         <div className='mt-4 flex flex-col justify-between'>
                                             <div className='md:h-32 mb-5'>
-                                                <h2 className='text-2xl font-semibold mb-2 text-start'>{pkg.title}</h2>
+                                                <h2 className='text-2xl font-semibold mb-2 text-start dark:text-black'>{pkg.title}</h2>
                                                 <p className='text-start text-gray-500 mb-2'>{pkg.description}</p>
                                                 <p className='flex items-center text-sky-800 font-medium text-xl'><TbCurrencyTaka></TbCurrencyTaka> {pkg.price}</p>
                                             </div>
                                             <div className='flex justify-between items-center mt-5'>
-                                                <p className='border px-2 rounded-sm bg-sky-200'>{pkg.tourType}</p>         
-                                                <button onClick={() => navigate(`/packageDetails/${pkg._id}`)} className='flex items-center gap-2 py-1 px-3 hover:border border-sky-200 '>View Details<FaArrowUpRightFromSquare /></button>
+                                                <p className='border px-2 rounded-sm bg-sky-600 dark:bg-sky-800'>{pkg.tourType}</p>         
+                                                <button onClick={() => navigate(`/packageDetails/${pkg._id}`)} className='flex items-center gap-2 py-1 px-3 dark:text-black'>View Details<FaArrowUpRightFromSquare /></button>
                                             </div>
 
                                         </div>
@@ -108,7 +108,7 @@ const TourismAndGuide = () => {
                                         <p className="text-gray-600 mb-2">Email: {guide.email}</p>
                                         <button
                                             onClick={() => navigate(`/guideProfile/${guide._id}`)}
-                                            className="mt-4 py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700"
+                                            className="mt-4 py-2 px-4 bg-green-600 text-white rounded dark:text-black hover:bg-green-700 "
                                         >
                                             View Profile
                                         </button>
