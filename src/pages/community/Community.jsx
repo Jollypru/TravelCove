@@ -33,7 +33,7 @@ const Community = () => {
                             className="w-full h-40 object-cover"
                         />
                         <div className="p-4">
-                            <div className='h-40'>
+                            <div className=''>
                                 <h3 className="text-xl font-bold mb-2">{story.title}</h3>
                                 <p className="text-gray-600 mt-2">
                                     {expandedStories[story._id]

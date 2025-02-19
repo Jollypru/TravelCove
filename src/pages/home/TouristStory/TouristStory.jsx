@@ -34,7 +34,7 @@ const TouristStory = () => {
         }));
     };
     return (
-        <div className="min-h-screen px-10 mb-16">
+        <div className="min-h-screen p-10">
             <h2 className="text-4xl font-bold text-center mb-8">Tourist Stories</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stories.map((story) => (
@@ -45,7 +45,7 @@ const TouristStory = () => {
                             className="w-full h-40 object-cover"
                         />
                         <div className="p-4">
-                            <div className='h-44'>
+                            <div className=''>
                                 <h3 className="text-xl font-bold mb-2">{story.title}</h3>
                                 <p className="text-gray-600 mt-2">
                                     {expandedStories[story._id]
