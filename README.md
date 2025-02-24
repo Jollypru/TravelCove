@@ -36,3 +36,16 @@ A tourism management website which allow users to view various travel packages, 
 * "react-toastify": "^11.0.3",
 * "sort-by": "^1.2.0",
 * "sweetalert2": "^11.15.10"
+
+## Installation & Setup
+### 1️⃣ Clone the Repository
+```
+git clone https://github.com/Jollypru/TravelCove.git
+cd TravelCove
+```
+
+### 2️⃣ Install Dependencies
+```
+npm install
+npm run dev
+```
